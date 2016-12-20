@@ -14,6 +14,14 @@ class Trial {
         }
     }
 
+    get typedTextPart() {
+        return this.textToType.slice(0, this.index);
+    }
+
+    get untypedTextPart() {
+        return this.textToType.slice(this.index);
+    }
+
     _onCorrectChar() {
         this.index++;
         if (this._isTrialOver()) {
@@ -30,7 +38,7 @@ class Trial {
     }
 
     _isTrialOver() {
-        return this.index == this.textToType.length;
+        return this.index === this.textToType.length;
     }
 }
 

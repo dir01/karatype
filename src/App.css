@@ -1,0 +1,17 @@
+.App {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#text-to-type {
+    font-size: 4em;
+}
+
+#text-to-type .typed {
+    color: navy;
+}
+
+#text-to-type .untyped {
+    color: lightblue;
+}

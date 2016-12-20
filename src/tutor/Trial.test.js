@@ -1,12 +1,12 @@
 let expect = require('chai').expect,
     path = require('path');
 
-let Trial = require(path.join(__dirname, '..', 'trial'));
+let Trial = require(path.join(__dirname, 'Trial'));
 
 
 describe('Trial', () => {
 
-    describe('tryChar gets correct char', () => {
+    describe('new Trial("H").tryChar("H")', () => {
         let trial = new Trial('H');
         const isCorrectChar = trial.tryChar('H');
 
@@ -23,7 +23,7 @@ describe('Trial', () => {
         });
     });
 
-    describe('tryChar gets incorrect char', () => {
+    describe('new Trial("H").tryChar("w")', () => {
         let trial = new Trial('H');
         let isCorrectChar = trial.tryChar('w');
 
@@ -37,6 +37,19 @@ describe('Trial', () => {
 
         it('does not end game', () => {
             expect(trial.isOver).to.be.false;
+        });
+    });
+
+    describe('new Trial("Hello").tryChar("H")', () => {
+        let trial = new Trial('Hello');
+        let isCorrectChar = trial.tryChar('H');
+
+        it('sets typedTextPart to "H" ', () => {
+            expect(trial.typedTextPart).to.equal("H");
+        });
+
+        it('sets untypedTextPart to "ellow world" ', () => {
+            expect(trial.untypedTextPart).to.equal('ello');
         });
     })
 
