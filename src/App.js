@@ -3,6 +3,12 @@ import keydown from 'react-keydown';
 import './App.css';
 
 
+let soundPaths = {
+    error: '/sounds/error.wav',
+    keystroke: '/sounds/keystroke.wav'
+};
+
+
 class App extends Component {
     render() {
         let trial = this.props.trial;
@@ -23,8 +29,15 @@ class App extends Component {
             if (result === undefined) {
                 return
             }
+            this.playSound(result);
         }
     }
+
+    playSound(isCorrect) {
+        let path = soundPaths[isCorrect ? 'keystroke' : 'error'];
+        new Audio(path).play();
+    }
+
 }
 
 export default keydown(App);
