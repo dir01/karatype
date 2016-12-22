@@ -18,8 +18,11 @@ class App extends Component {
 
     componentWillReceiveProps({ keydown }) {
         if (keydown.event) {
-            this.props.trial.tryChar(keydown.event.key);
             console.log(keydown.event);
+            let result = this.props.trial.tryChar(keydown.event.key);
+            if (result === undefined) {
+                return
+            }
         }
     }
 }

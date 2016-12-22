@@ -51,6 +51,10 @@ describe('Trial', () => {
         it('sets untypedTextPart to "ellow world" ', () => {
             expect(trial.untypedTextPart).to.equal('ello');
         });
-    })
+    });
+
+    describe('new Trial("foo").tryChar("bo") == undefined', () => {
+        expect(new Trial("foo").tryChar("bo")).to.be.undefined;
+    });
 
 });

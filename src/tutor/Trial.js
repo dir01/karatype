@@ -6,6 +6,9 @@ class Trial {
     }
 
     tryChar(char) {
+        if (char.length > 1) {
+            return;
+        }
         if (this._isCharCorrect(char)) {
             this._onCorrectChar();
             return true;
