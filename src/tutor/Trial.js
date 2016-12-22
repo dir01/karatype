@@ -1,35 +1,71 @@
+
 class Trial {
     constructor(textToType) {
         this.textToType = textToType;
         this.index = 0;
-        this.isOver = false;
+        this.errorsIndexes = [];
+        this.stats = {errors: 0};
     }
 
     tryChar(char) {
         if (char.length > 1) {
-            return;
+            return undefined;
         }
         if (this._isCharCorrect(char)) {
             this._onCorrectChar();
             return true;
         } else {
+            this._onIncorrectChar();
             return false;
         }
     }
 
-    get typedTextPart() {
-        return this.textToType.slice(0, this.index);
+    get isOver() {
+        return this.index === this.textToType.length;
     }
 
-    get untypedTextPart() {
-        return this.textToType.slice(this.index);
+    get snippets() {
+        let snippets = [];
+        let idx = this.index;
+        if (idx) {
+            let typedText = this.textToType.slice(0, idx);
+            if (!this.errorsIndexes.length) {
+                snippets.push({type: 'correct', text: typedText})
+            } else {
+                var correctText = '', errorText = '';
+                for (var i = 0; i < typedText.length; i++) {
+                    let isError = this.errorsIndexes.includes(i);
+                    if (isError) {
+                        errorText += typedText[i];
+                        if (correctText) {
+                            snippets.push({type: 'correct', text: correctText});
+                            correctText = '';
+                        }
+                    } else {
+                        correctText += typedText[i];
+                        if (errorText) {
+                            snippets.push({type: 'error', text: errorText});
+                            errorText = '';
+                        }
+                    }
+                }
+                errorText && snippets.push({type: 'error', text: errorText});
+                correctText && snippets.push({type: 'correct', text: correctText});
+            }
+        }
+        snippets.push({type: 'current', text: this.textToType.slice(idx, idx + 1)});
+        snippets.push({type: 'untyped', text: this.textToType.slice(idx + 1)});
+        return snippets;
     }
 
     _onCorrectChar() {
         this.index++;
-        if (this._isTrialOver()) {
-            this.isOver = true;
-        }
+    }
+
+    _onIncorrectChar() {
+        this.errorsIndexes.push(this.index);
+        this.stats.errors++;
+        this.index++;
     }
 
     _isCharCorrect(char) {
@@ -38,10 +74,6 @@ class Trial {
 
     _getCurrentChar() {
         return this.textToType[this.index];
-    }
-
-    _isTrialOver() {
-        return this.index === this.textToType.length;
     }
 }
 

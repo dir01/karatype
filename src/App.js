@@ -15,8 +15,11 @@ class App extends Component {
         return (
             <div className="App">
                 <div id="text-to-type">
-                    <span className="typed">{trial.typedTextPart}</span>
-                    <span className="untyped">{trial.untypedTextPart}</span>
+                    {
+                        trial.snippets.map((snippet, index) => {
+                            return <span key={index} className={snippet.type}>{snippet.text}</span>
+                        })
+                    }
                 </div>
             </div>
         );

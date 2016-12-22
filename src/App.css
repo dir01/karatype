@@ -16,10 +16,11 @@ body {
     letter-spacing: 1px;
 }
 
-#text-to-type .typed {
-    color: #ddd;
+#text-to-type .correct { color: #ddd; }
+#text-to-type .error { color: #D41341 }
+#text-to-type .current {
+    color: #2879C9;
+    border-bottom: 4px solid #2879C9;
 }
 
-#text-to-type .untyped {
-    color: #444;
-}
+#text-to-type .untyped { color: #444; }

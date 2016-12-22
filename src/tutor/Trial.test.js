@@ -1,3 +1,5 @@
+"use strict";
+
 let expect = require('chai').expect,
     path = require('path');
 
@@ -6,7 +8,7 @@ let Trial = require(path.join(__dirname, 'Trial'));
 
 describe('Trial', () => {
 
-    describe('new Trial("H").tryChar("H")', () => {
+    describe('Correct last char: new Trial("H").tryChar("H")', () => {
         let trial = new Trial('H');
         const isCorrectChar = trial.tryChar('H');
 
@@ -23,38 +25,82 @@ describe('Trial', () => {
         });
     });
 
-    describe('new Trial("H").tryChar("w")', () => {
-        let trial = new Trial('H');
-        let isCorrectChar = trial.tryChar('w');
+    describe('Incorrect non-last char: new Trial("He").tryChar("h")', () => {
+        let trial = new Trial('He');
+        let isCorrectChar = trial.tryChar('h');
 
-        it('returns false since "w" is not "H" ', () => {
+        it('returns false since "h" is not "H" ', () => {
             expect(isCorrectChar).to.be.false;
         });
 
-        it('does not increase index', () => {
-            expect(trial.index).to.equal(0);
+        it('increases index', () => {
+            expect(trial.index).to.equal(1);
         });
 
-        it('does not end game', () => {
+        it('increases errors count', () => {
+           expect(trial.stats.errors).to.equal(1);
+        });
+
+        it('saves error index', () => {
+            expect(trial.errorsIndexes).to.deep.equal([0]);
+        });
+
+        it('game is not over since we have more stuff to type', () => {
             expect(trial.isOver).to.be.false;
         });
     });
 
-    describe('new Trial("Hello").tryChar("H")', () => {
-        let trial = new Trial('Hello');
-        let isCorrectChar = trial.tryChar('H');
+    describe('Text snippets: new Trial("Hello")', () => {
+        var trial;
 
-        it('sets typedTextPart to "H" ', () => {
-            expect(trial.typedTextPart).to.equal("H");
+        beforeEach(() => {
+            trial = new Trial('Hello');
         });
 
-        it('sets untypedTextPart to "ellow world" ', () => {
-            expect(trial.untypedTextPart).to.equal('ello');
+        it('beginning: current "H" and untyped "ello" ', () => {
+            expect(trial.snippets).to.deep.equal([
+                {text: "H", type: 'current'},
+                {text: 'ello', type: 'untyped'}
+            ]);
         });
+
+        it('typed "H": correct "H", current "e" and untyped "llo" ', () => {
+            trial.tryChar('H');
+            expect(trial.snippets).to.deep.equal([
+                {text: "H", type: 'correct'},
+                {text: 'e', type: 'current'},
+                {text: 'llo', type: 'untyped'}
+            ]);
+        });
+
+        it('typed "HE": correct "H", error at "e", current "l" and untyped "lo" ', () => {
+            trial.tryChar('H');
+            trial.tryChar('E');
+            expect(trial.snippets).to.deep.equal([
+                {text: "H", type: 'correct'},
+                {text: 'e', type: 'error'},
+                {text: 'l', type: 'current'},
+                {text: 'lo', type: 'untyped'}
+            ]);
+        });
+
+        it('typed "HEl": correct "H", error at "e", correct "l", current "l" and untyped "o" ', () => {
+            trial.tryChar('H');
+            trial.tryChar('E');
+            trial.tryChar('l');
+            expect(trial.snippets).to.deep.equal([
+                {text: "H", type: 'correct'},
+                {text: 'e', type: 'error'},
+                {text: 'l', type: 'correct'},
+                {text: 'l', type: 'current'},
+                {text: 'o', type: 'untyped'}
+            ]);
+        });
+
     });
 
-    describe('new Trial("foo").tryChar("bo") == undefined', () => {
-        expect(new Trial("foo").tryChar("bo")).to.be.undefined;
+    describe('new Trial("foo").tryChar("Ctrl") == undefined', () => {
+        expect(new Trial("foo").tryChar("Ctrl")).to.be.undefined;
     });
 
 });
