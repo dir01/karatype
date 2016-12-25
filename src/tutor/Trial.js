@@ -58,6 +58,12 @@ class Trial {
         return snippets;
     }
 
+    get activeKeys() {
+        let char = this._getCurrentChar();
+        let lower = char.toLowerCase();
+        return char == lower ? [char] : [lower, 'shift']
+    }
+
     _onCorrectChar() {
         this.index++;
     }

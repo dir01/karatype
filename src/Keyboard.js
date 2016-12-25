@@ -10,7 +10,7 @@ class Keyboard extends Component {
             <div className="Keyboard">{
                 layout.rows.map((row, i) => {
                     return <div className="Keyboard__Row" key={i}>
-                        {row.map(this.renderKey)}
+                        {row.map(this.renderKey.bind(this))}
                     </div>;
                 })
             }</div>
@@ -18,7 +18,11 @@ class Keyboard extends Component {
     }
 
     renderKey(key, i) {
-        return <div className={`KeyboardKey ${key.className}`} key={`${key.key}_${i}`}>{key.label || key.key}</div>;
+        let active = this.props.activeKeys.indexOf(key.key) >= 0;
+        return <div
+            className={`KeyboardKey ${key.className} ${active ? 'active' : ''}`}
+            key={`${key.key}_${i}`}
+        >{key.label || key.key}</div>;
     }
 
 

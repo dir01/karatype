@@ -19,7 +19,7 @@ class App extends Component {
                     <TextToType trial={this.props.trial} />
                 </div>
                 <div className="keyboard-container">
-                    <Keyboard layout={layouts.qwerty} />
+                    <Keyboard layout={layouts.qwerty} activeKeys={this.props.trial.activeKeys}/>
                 </div>
             </div>
         );
