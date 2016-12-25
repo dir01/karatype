@@ -23,6 +23,15 @@ describe('Trial', () => {
         it('ends game', () => {
             expect(trial.isOver).to.be.true;
         });
+
+        it('has empty activeChars', () => {
+            expect(trial.activeKeys).to.deep.equal([]);
+        });
+
+        it('makes trial stop accepting chars', () => {
+            expect(trial.tryChar('W')).to.be.undefined;
+        });
+
     });
 
     describe('Incorrect non-last char: new Trial("He").tryChar("h")', () => {

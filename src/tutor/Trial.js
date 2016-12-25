@@ -8,6 +8,9 @@ class Trial {
     }
 
     tryChar(char) {
+        if (this.isOver) {
+            return undefined;
+        }
         if (char.length > 1) {
             return this._trySpectialChar(char);
         }
@@ -21,12 +24,12 @@ class Trial {
     }
 
     _trySpectialChar(char) {
-        if (char != 'Backspace' || this.index === 0) {
+        if (char !== 'Backspace' || this.index === 0) {
             return undefined
         }
         this.index -= 1;
         let idx = this.errorsIndexes.indexOf(this.index);
-        if (idx != -1) {
+        if (idx !== -1) {
             this.errorsIndexes.pop(idx);
         }
         return true
@@ -71,9 +74,12 @@ class Trial {
     }
 
     get activeKeys() {
+        if (this.isOver) {
+            return [];
+        }
         let char = this._getCurrentChar();
         let lower = char.toLowerCase();
-        return char == lower ? [char] : [lower, 'shift']
+        return char === lower ? [char] : [lower, 'shift']
     }
 
     _onCorrectChar() {
