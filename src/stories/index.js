@@ -13,5 +13,5 @@ storiesOf('KeyboardKey', module)
 
 storiesOf('Keyboard', module)
     .add('qwerty', () => (
-        <Keyboard layout={layouts.qwerty} />
+        <Keyboard layout={layouts.qwerty}/>
     ));

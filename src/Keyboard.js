@@ -18,7 +18,7 @@ class Keyboard extends Component {
     }
 
     renderKey(key, i) {
-        let active = this.props.activeKeys.indexOf(key.key) >= 0;
+        let active = (this.props.activeKeys || []).indexOf(key.key) >= 0;
         return <div
             className={`KeyboardKey ${key.className} ${active ? 'active' : ''}`}
             key={`${key.key}_${i}`}
