@@ -99,8 +99,52 @@ describe('Trial', () => {
 
     });
 
-    describe('new Trial("foo").tryChar("Ctrl") == undefined', () => {
-        expect(new Trial("foo").tryChar("Ctrl")).to.be.undefined;
+    describe('Trial control keys handling', () => {
+        let trial;
+        beforeEach(() => {
+            trial = new Trial("foo bar");
+        });
+ 
+        it('denies Backspace when nothing was typed yet', () => {
+            expect(trial.tryChar("Backspace")).to.be.undefined;
+            expect(trial.index).to.equal(0);
+        });
+
+        it('handles Backspace after correct char', () => {
+            trial.tryChar('f');
+            expect(trial.index).to.equal(1);
+            let ret = trial.tryChar("Backspace");
+            expect(ret).to.be.true;
+            expect(trial.index).to.equal(0);
+        });
+
+        it('handles Backspace after error', () => {
+            trial.tryChar('W');
+            expect(trial.index).to.equal(1);
+            expect(trial.errorsIndexes).to.deep.equal([0]);
+
+            let ret = trial.tryChar("Backspace");
+            expect(ret).to.be.true;
+            expect(trial.index).to.equal(0);
+            expect(trial.errorsIndexes).to.deep.equal([]);
+        });
+
+        it('handles Backspace after error and space', () => {
+            trial.tryChar('f');
+            trial.tryChar('o');
+            trial.tryChar('X');
+            trial.tryChar(' ');
+            expect(trial.index).to.equal(4);
+            expect(trial.errorsIndexes).to.deep.equal([2])
+            trial.tryChar('Backspace');
+            expect(trial.index).to.equal(3);
+            expect(trial.errorsIndexes).to.deep.equal([2])
+        });
+
+        it('denies stuff like control', () => {
+            expect(trial.tryChar("Ctrl")).to.be.undefined
+        });
+        
     });
 
 });
