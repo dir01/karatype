@@ -14,4 +14,7 @@ storiesOf('KeyboardKey', module)
 storiesOf('Keyboard', module)
     .add('qwerty', () => (
         <Keyboard layout={layouts.qwerty}/>
+    ))
+    .add('qwerty with active space', () => (
+    	<Keyboard layout={layouts.qwerty} activeKeys={[' ']} />
     ));
