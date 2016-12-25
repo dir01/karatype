@@ -19,7 +19,8 @@
 }
 
 .KeyboardKey.active {
-    color: #2879C9;
+    background: #2879C9 !important;
+    color: #fff;
 }
 
 .KeyboardKey.tab { width: 8%; }
