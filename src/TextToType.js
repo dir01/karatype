@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 
-class TextToType extends Component {
+export default class TextToType extends Component {
     render() {
-        let trial = this.props.trial;
-        return '';
+        return (
+            <div id="text-to-type">
+                {
+                    this.props.trial.snippets.map((snippet, index) => {
+                        return <span
+                            key={index}
+                            className={snippet.type}
+                            >{snippet.text}</span>;
+                    })
+                }
+            </div>
+        );
     }
-}
-
-export default TextToType;
+};

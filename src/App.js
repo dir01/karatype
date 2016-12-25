@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import keydown from 'react-keydown';
 import './App.css';
+import keydown from 'react-keydown';
+import TextToType from './TextToType';
+import {Keyboard, layouts} from './Keyboard';
 
 
 let soundPaths = {
@@ -11,15 +13,13 @@ let soundPaths = {
 
 class App extends Component {
     render() {
-        let trial = this.props.trial;
         return (
             <div className="App">
-                <div id="text-to-type">
-                    {
-                        trial.snippets.map((snippet, index) => {
-                            return <span key={index} className={snippet.type}>{snippet.text}</span>
-                        })
-                    }
+                <div className="text-container">
+                    <TextToType trial={this.props.trial} />
+                </div>
+                <div className="keyboard-container">
+                    <Keyboard layout={layouts.qwerty} />
                 </div>
             </div>
         );

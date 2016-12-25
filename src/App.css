@@ -4,9 +4,20 @@ body {
     background: #f1f1f1;
 }
 
-.App {
-    text-align: center;
-    margin: 30px 60px;
+.App { text-align: center; }
+
+.App .text-container, .App .keyboard-container {
+    position: fixed;
+    height: 50%;
+}
+
+.App .text-container {
+    top: 0;
+    padding: 40px 30px 0;
+}
+.App .keyboard-container {
+    bottom: 0;
+    width: 100%;
 }
 
 #text-to-type {
@@ -17,10 +28,6 @@ body {
 }
 
 #text-to-type .correct { color: #ddd; }
-#text-to-type .error { color: #D41341 }
-#text-to-type .current {
-    color: #2879C9;
-    border-bottom: 4px solid #2879C9;
-}
-
+#text-to-type .error { color: #D41341; }
+#text-to-type .current { color: #2879C9; text-decoration: underline; }
 #text-to-type .untyped { color: #444; }
