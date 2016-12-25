@@ -21,6 +21,7 @@
 .KeyboardKey.active {
     background: #2879C9 !important;
     color: #fff;
+    border-color: black;
 }
 
 .KeyboardKey.tab { width: 8%; }

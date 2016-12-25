@@ -17,7 +17,10 @@ body {
 }
 .App .keyboard-container {
     bottom: 0;
-    width: 100%;
+    width: 80%;
+    left: 5%;
+    right: 5%;
+    margin: 0 auto;
 }
 
 #text-to-type {
