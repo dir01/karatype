@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import keydown from 'react-keydown';
 import TextToType from './TextToType';
 import {Keyboard, layouts} from './Keyboard';
 
@@ -25,15 +24,15 @@ class App extends Component {
         );
     }
 
-    componentWillReceiveProps({ keydown }) {
-        if (keydown.event) {
-            console.log(keydown.event);
-            let result = this.props.trial.tryChar(keydown.event.key);
+    componentWillMount() {
+        document.addEventListener('keydown', (event) => {
+            let result = this.props.trial.tryChar(event.key);
             if (result === undefined) {
                 return
             }
             this.playSound(result);
-        }
+            this.forceUpdate();
+        })
     }
 
     playSound(isCorrect) {
@@ -43,4 +42,4 @@ class App extends Component {
 
 }
 
-export default keydown(App);
+export default App;
