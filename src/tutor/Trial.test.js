@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let expect = require('chai').expect,
     path = require('path');
@@ -47,7 +47,7 @@ describe('Trial', () => {
         });
 
         it('increases errors count', () => {
-           expect(trial.stats.errors).to.equal(1);
+            expect(trial.stats.errors).to.equal(1);
         });
 
         it('saves error index', () => {
@@ -68,7 +68,7 @@ describe('Trial', () => {
 
         it('beginning: current "H" and untyped "ello" ', () => {
             expect(trial.snippets).to.deep.equal([
-                {text: "H", type: 'current'},
+                {text: 'H', type: 'current'},
                 {text: 'ello', type: 'untyped'}
             ]);
         });
@@ -76,7 +76,7 @@ describe('Trial', () => {
         it('typed "H": correct "H", current "e" and untyped "llo" ', () => {
             trial.tryChar('H');
             expect(trial.snippets).to.deep.equal([
-                {text: "H", type: 'correct'},
+                {text: 'H', type: 'correct'},
                 {text: 'e', type: 'current'},
                 {text: 'llo', type: 'untyped'}
             ]);
@@ -86,7 +86,7 @@ describe('Trial', () => {
             trial.tryChar('H');
             trial.tryChar('E');
             expect(trial.snippets).to.deep.equal([
-                {text: "H", type: 'correct'},
+                {text: 'H', type: 'correct'},
                 {text: 'e', type: 'error'},
                 {text: 'l', type: 'current'},
                 {text: 'lo', type: 'untyped'}
@@ -98,7 +98,7 @@ describe('Trial', () => {
             trial.tryChar('E');
             trial.tryChar('l');
             expect(trial.snippets).to.deep.equal([
-                {text: "H", type: 'correct'},
+                {text: 'H', type: 'correct'},
                 {text: 'e', type: 'error'},
                 {text: 'l', type: 'correct'},
                 {text: 'l', type: 'current'},
@@ -111,18 +111,18 @@ describe('Trial', () => {
     describe('Trial control keys handling', () => {
         let trial;
         beforeEach(() => {
-            trial = new Trial("foo bar");
+            trial = new Trial('foo bar');
         });
 
         it('denies Backspace when nothing was typed yet', () => {
-            expect(trial.tryChar("Backspace")).to.be.undefined;
+            expect(trial.tryChar('Backspace')).to.be.undefined;
             expect(trial.index).to.equal(0);
         });
 
         it('handles Backspace after correct char', () => {
             trial.tryChar('f');
             expect(trial.index).to.equal(1);
-            let ret = trial.tryChar("Backspace");
+            let ret = trial.tryChar('Backspace');
             expect(ret).to.be.true;
             expect(trial.index).to.equal(0);
         });
@@ -132,7 +132,7 @@ describe('Trial', () => {
             expect(trial.index).to.equal(1);
             expect(trial.errorsIndexes).to.deep.equal([0]);
 
-            let ret = trial.tryChar("Backspace");
+            let ret = trial.tryChar('Backspace');
             expect(ret).to.be.true;
             expect(trial.index).to.equal(0);
             expect(trial.errorsIndexes).to.deep.equal([]);
@@ -144,26 +144,28 @@ describe('Trial', () => {
             trial.tryChar('X');
             trial.tryChar(' ');
             expect(trial.index).to.equal(4);
-            expect(trial.errorsIndexes).to.deep.equal([2])
+            expect(trial.errorsIndexes).to.deep.equal([2]);
             trial.tryChar('Backspace');
             expect(trial.index).to.equal(3);
-            expect(trial.errorsIndexes).to.deep.equal([2])
+            expect(trial.errorsIndexes).to.deep.equal([2]);
         });
 
         it('denies stuff like control', () => {
-            expect(trial.tryChar("Ctrl")).to.be.undefined
+            expect(trial.tryChar('Ctrl')).to.be.undefined;
         });
     });
 
     describe('Trial.progress', () => {
         let trial = new Trial('Hello');
+
         it('is 0 in the beggining', () => {
             expect(trial.progress).to.equal(0);
-        })
+        });
+
         it('is 20 when 1 of 5 letters typed', () => {
             trial.tryChar('H');
             expect(trial.progress).to.equal(20);
-        })
-    })
+        });
+    });
 
 });

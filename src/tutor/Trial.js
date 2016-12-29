@@ -49,7 +49,7 @@ class Trial {
         if (idx) {
             let typedText = this.textToType.slice(0, idx);
             if (!this.errorsIndexes.length) {
-                snippets.push({type: 'correct', text: typedText})
+                snippets.push({type: 'correct', text: typedText});
             } else {
                 var correctText = '', errorText = '';
                 for (var i = 0; i < typedText.length; i++) {
@@ -87,7 +87,7 @@ class Trial {
         }
         let char = this._getCurrentChar();
         let lower = char.toLowerCase();
-        return char === lower ? [char] : [lower, 'shift']
+        return char === lower ? [char] : [lower, 'shift'];
     }
 
     _onCorrectChar() {

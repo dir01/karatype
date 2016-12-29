@@ -9,9 +9,11 @@ export default class Indicator extends Component {
             }</div>
         );
     }
+
     get text() {
         return <span dangerouslySetInnerHTML={ {__html: this.props.text} } />; 
     }
+
     get progressBar() {
         return <div className="progressBar"><div style={ {width: `${this.props.progress}%`} }/></div>;
     }
