@@ -4,7 +4,8 @@ class Trial {
         this.textToType = textToType;
         this.index = 0;
         this.errorsIndexes = [];
-        this.stats = {errors: 0};
+        this.errorsCount = 0;
+        this.keystrokesCount = 0;
     }
 
     tryChar(char) {
@@ -14,6 +15,7 @@ class Trial {
         if (char.length > 1) {
             return this._trySpectialChar(char);
         }
+        this.keystrokesCount++;
         if (this._isCharCorrect(char)) {
             this._onCorrectChar();
             return true;
@@ -27,7 +29,8 @@ class Trial {
         if (char !== 'Backspace' || this.index === 0) {
             return undefined;
         }
-        this.index -= 1;
+        this.keystrokesCount++;
+        this.index--;
         let idx = this.errorsIndexes.indexOf(this.index);
         if (idx !== -1) {
             this.errorsIndexes.pop(idx);
@@ -77,6 +80,22 @@ class Trial {
         return snippets;
     }
 
+    get stats() {
+        return {
+            errorRate: this.errorRate,
+            unproductiveKeystrokesRate: this.unproductiveKeystrokesRate,
+        }
+    }
+
+    get errorRate() {
+        return this.errorsCount / this.textToType.length * 100;
+    }
+
+    get unproductiveKeystrokesRate() {
+        let charsCount = this.textToType.length;
+        return (this.keystrokesCount - charsCount) / charsCount * 100;
+    }
+
     get progress() {
         return this.index / this.textToType.length * 100;
     }
@@ -96,7 +115,7 @@ class Trial {
 
     _onIncorrectChar() {
         this.errorsIndexes.push(this.index);
-        this.stats.errors++;
+        this.errorsCount++;
         this.index++;
     }
 

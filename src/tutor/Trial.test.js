@@ -47,7 +47,7 @@ describe('Trial', () => {
         });
 
         it('increases errors count', () => {
-            expect(trial.stats.errors).to.equal(1);
+            expect(trial.errorsCount).to.equal(1);
         });
 
         it('saves error index', () => {
@@ -165,6 +165,27 @@ describe('Trial', () => {
         it('is 20 when 1 of 5 letters typed', () => {
             trial.tryChar('H');
             expect(trial.progress).to.equal(20);
+        });
+    });
+
+    describe('Trial stats', () => {
+        it('calculates errors percentage', () => {
+            let trial = new Trial('Hello');
+            trial.tryChar('H'); 
+            trial.tryChar('e'); 
+            trial.tryChar('l'); 
+            trial.tryChar('l');
+            expect(trial.stats.errorRate).to.equal(0);
+            trial.tryChar('x');
+            expect(trial.stats.errorRate).to.equal(20);
+        });
+
+        it('calculates unproductive keystrokes rate', () => {
+            let trial = new Trial('Hello');
+            ['h', 'Backspace', 'H', 'e', 'l', 'l', 'o'].forEach((chr) => {
+                trial.tryChar(chr);
+            });
+            expect(trial.stats.unproductiveKeystrokesRate).to.equal((7-5)/5*100); 
         });
     });
 
