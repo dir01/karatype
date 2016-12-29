@@ -155,4 +155,15 @@ describe('Trial', () => {
         });
     });
 
+    describe('Trial.progress', () => {
+        let trial = new Trial('Hello');
+        it('is 0 in the beggining', () => {
+            expect(trial.progress).to.equal(0);
+        })
+        it('is 20 when 1 of 5 letters typed', () => {
+            trial.tryChar('H');
+            expect(trial.progress).to.equal(20);
+        })
+    })
+
 });

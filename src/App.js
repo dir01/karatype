@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import TextToType from './TextToType';
 import {Keyboard, layouts} from './Keyboard';
-
+import Toolbar from './Toolbar';
 
 let soundPaths = {
     error: '/sounds/error.wav',
@@ -12,8 +12,14 @@ let soundPaths = {
 
 class App extends Component {
     render() {
+        let toolbar = this.props.trial.isStarted ? (
+            <Toolbar progress={ this.props.trial.progress } />
+        ) : (
+            <Toolbar text="Excercise is loaded. Start typing whenever ready."/>
+        );
         return (
             <div className="App">
+                { toolbar }
                 <div className="text-container">
                     <TextToType trial={ this.props.trial } />
                 </div>

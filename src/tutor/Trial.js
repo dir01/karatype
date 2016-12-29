@@ -35,6 +35,10 @@ class Trial {
         return true;
     }
 
+    get isStarted() {
+        return this.index > 0;
+    }
+
     get isOver() {
         return this.index === this.textToType.length;
     }
@@ -71,6 +75,10 @@ class Trial {
         snippets.push({type: 'current', text: this.textToType.slice(idx, idx + 1)});
         snippets.push({type: 'untyped', text: this.textToType.slice(idx + 1)});
         return snippets;
+    }
+
+    get progress() {
+        return this.index / this.textToType.length * 100;
     }
 
     get activeKeys() {
