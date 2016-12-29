@@ -25,14 +25,14 @@ class Trial {
 
     _trySpectialChar(char) {
         if (char !== 'Backspace' || this.index === 0) {
-            return undefined
+            return undefined;
         }
         this.index -= 1;
         let idx = this.errorsIndexes.indexOf(this.index);
         if (idx !== -1) {
             this.errorsIndexes.pop(idx);
         }
-        return true
+        return true;
     }
 
     get isOver() {

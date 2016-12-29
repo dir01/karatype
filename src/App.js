@@ -15,10 +15,10 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="text-container">
-                    <TextToType trial={this.props.trial} />
+                    <TextToType trial={ this.props.trial } />
                 </div>
                 <div className="keyboard-container">
-                    <Keyboard layout={layouts.qwerty} activeKeys={this.props.trial.activeKeys}/>
+                    <Keyboard layout={ layouts.qwerty } activeKeys={ this.props.trial.activeKeys }/>
                 </div>
             </div>
         );
@@ -28,11 +28,11 @@ class App extends Component {
         document.addEventListener('keydown', (event) => {
             let result = this.props.trial.tryChar(event.key);
             if (result === undefined) {
-                return
+                return;
             }
             this.playSound(result);
             this.forceUpdate();
-        })
+        });
     }
 
     playSound(isCorrect) {

@@ -113,7 +113,7 @@ describe('Trial', () => {
         beforeEach(() => {
             trial = new Trial("foo bar");
         });
- 
+
         it('denies Backspace when nothing was typed yet', () => {
             expect(trial.tryChar("Backspace")).to.be.undefined;
             expect(trial.index).to.equal(0);
@@ -153,7 +153,6 @@ describe('Trial', () => {
         it('denies stuff like control', () => {
             expect(trial.tryChar("Ctrl")).to.be.undefined
         });
-        
     });
 
 });

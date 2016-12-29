@@ -8,13 +8,13 @@ storiesOf('KeyboardKey', module)
         <KeyboardKey label='q'/>
     ))
     .add('active', () => (
-        <KeyboardKey label='q' active={true} />
+        <KeyboardKey label='q' active={ true } />
     ));
 
 storiesOf('Keyboard', module)
     .add('qwerty', () => (
-        <Keyboard layout={layouts.qwerty}/>
+        <Keyboard layout={ layouts.qwerty }/>
     ))
     .add('qwerty with active space', () => (
-    	<Keyboard layout={layouts.qwerty} activeKeys={[' ']} />
+        <Keyboard layout={ layouts.qwerty } activeKeys={ [' '] } />
     ));
