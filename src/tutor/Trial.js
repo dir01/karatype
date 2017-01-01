@@ -1,11 +1,12 @@
 
 class Trial {
-    constructor(textToType) {
+    constructor(textToType, level) {
         this.textToType = textToType;
         this.index = 0;
         this.errorsIndexes = [];
         this.errorsCount = 0;
         this.keystrokesCount = 0;
+        this.level = level;
     }
 
     tryChar(char) {
@@ -84,7 +85,7 @@ class Trial {
         return {
             errorRate: this.errorRate,
             unproductiveKeystrokesRate: this.unproductiveKeystrokesRate,
-        }
+        };
     }
 
     get errorRate() {

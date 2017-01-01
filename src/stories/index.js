@@ -3,7 +3,7 @@ import { storiesOf, action, linkTo } from '@kadira/storybook';
 import { KeyboardKey, Keyboard, layouts } from '../Keyboard';
 import Toolbar from '../Toolbar';
 import Indicator from '../Indicator';
-
+import LevelSelector from '../LevelSelector';
 
 storiesOf('KeyboardKey', module)
     .add('normal', () => (
@@ -29,8 +29,18 @@ storiesOf('Indicator', module)
         <Indicator progress="42" />
     ));
 
+let levels = [
+    { name: 'f j' },
+    { name: 'a s d f g h j k l ; q w e r t y u i o p [ ] z x c v b n m , . /' }
+];
+
+storiesOf('LevelSelector', module)
+    .add('normal', () => (
+        <LevelSelector levels={ levels } currentLevel={ 1 } onLevelChange={ action('levelChange') } />
+    ));
+
 storiesOf('Toolbar', module)
     .add('normal', () => (
-        <Toolbar />
+        <Toolbar levels={ levels } currentLevel={ 1 } onLevelChange={ action('levelChange') } />
     ));
 

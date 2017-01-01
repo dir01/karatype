@@ -12,33 +12,56 @@ let soundPaths = {
 
 class App extends Component {
     render() {
-        let toolbar = this.props.trial.isStarted ? (
-            <Toolbar progress={ this.props.trial.progress } />
+        let toolbar = this.trial.isStarted ? (
+            <Toolbar
+                progress={ this.trial.progress }
+                levels={ this.props.tutor.levels }
+                currentLevel={ this.props.tutor.level }
+                onLevelChange={ this.handleLevelChange.bind(this) }
+            />
         ) : (
-            <Toolbar text="Excercise is loaded. Start typing whenever ready."/>
+            <Toolbar
+                text="Excercise is loaded. Start typing whenever ready."
+                levels={ this.props.tutor.levels }
+                currentLevel={ this.props.tutor.level }
+                onLevelChange={ this.handleLevelChange.bind(this) }
+            />
         );
         return (
             <div className="App">
                 { toolbar }
                 <div className="text-container">
-                    <TextToType trial={ this.props.trial } />
+                    <TextToType trial={ this.trial } />
                 </div>
                 <div className="keyboard-container">
-                    <Keyboard layout={ layouts.qwerty } activeKeys={ this.props.trial.activeKeys }/>
+                    <Keyboard layout={ layouts.qwerty } activeKeys={ this.trial.activeKeys }/>
                 </div>
             </div>
         );
     }
 
+    get trial() {
+        if (!this._trial || this._trial.isOver) {
+            this._trial = this.props.tutor.getNextTrial();
+        }
+        return this._trial;
+    }
+
     componentWillMount() {
         document.addEventListener('keydown', (event) => {
-            let result = this.props.trial.tryChar(event.key);
+            let result = this.trial.tryChar(event.key);
             if (result === undefined) {
                 return;
             }
             this.playSound(result);
             this.forceUpdate();
         });
+    }
+
+    handleLevelChange(newLevel) {
+        this.props.tutor.currentLevel = newLevel;
+        this._trial = null;
+        this.forceUpdate();
     }
 
     playSound(isCorrect) {
