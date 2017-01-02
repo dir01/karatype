@@ -10,9 +10,9 @@ export default class Toolbar extends Component {
     render() {
         return (
             <div id="Toolbar">
-                <button id="reload"><img src={ restart } /></button>
-                <button id="pause"><img src={ pause } /></button>
-                <button id="skip"><img src={ skip } /></button>
+                <button id="reload"><img src={ restart } role="presentation" /></button>
+                <button id="pause"><img src={ pause } role="presentation" /></button>
+                <button id="skip"><img src={ skip } role="presentation" /></button>
                 <Indicator text={ this.props.text } progress={ this.props.progress } />
                 <LevelSelector
                     levels={ this.props.levels }
