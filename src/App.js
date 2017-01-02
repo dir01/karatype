@@ -31,7 +31,7 @@ class App extends Component {
             <div className="App">
                 { toolbar }
                 <div className="text-container">
-                    <TextToType trial={ this.trial } />
+                    <TextToType snippets={ this.trial.snippets } />
                 </div>
                 <div className="keyboard-container">
                     <Keyboard layout={ layouts.qwerty } activeKeys={ this.trial.activeKeys }/>

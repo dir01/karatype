@@ -4,6 +4,18 @@ import { KeyboardKey, Keyboard, layouts } from '../Keyboard';
 import Toolbar from '../Toolbar';
 import Indicator from '../Indicator';
 import LevelSelector from '../LevelSelector';
+import TextToType from '../TextToType';
+
+
+storiesOf('TextToType', module)
+    .add('normal', () => (
+        <TextToType snippets={ [
+            {type: 'correct', text: 'Oh my '},
+            {type: 'error', text: 'god it\'s the'},
+            {type: 'current', text: ' '},
+            {type: 'untyped', text: 'funky shit'}
+        ] } />
+    ));
 
 storiesOf('KeyboardKey', module)
     .add('normal', () => (

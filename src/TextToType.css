@@ -1,0 +1,14 @@
+
+.TextToType {
+    font-size: 2.5em;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-variant-ligatures: none;
+    font-weight: bolder;
+    letter-spacing: 1px;
+}
+
+.TextToType .correct { color: #ddd; }
+.TextToType .error { color: #D41341; }
+.TextToType .error.space { text-decoration: underline; }
+.TextToType .current { color: #2879C9; text-decoration: underline; }
+.TextToType .untyped { color: #444; }
