@@ -36,7 +36,7 @@ export default class TextToType extends Component {
             + '</span>'
         );
         return (
-            <span key={index} dangerouslySetInnerHTML={ {__html: newText} } />
+            <span key={ index } dangerouslySetInnerHTML={ {__html: newText} } />
         );
     }
 }
