@@ -62,7 +62,7 @@ const levels = [
     }
 ];
 
-let tutor = new Tutor(levels, 1);
+let tutor = new Tutor(levels, 0);
 
 
 ReactDOM.render(
