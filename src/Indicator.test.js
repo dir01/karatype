@@ -19,4 +19,4 @@ it('doesn\'t contain progressBar with text=', () => {
     const wrapper = render(<Indicator text="hello <b>world</b>" />);
     expect(wrapper.find('.progressBar').length).to.equal(0);
     expect(wrapper.find('#Indicator>span').length).to.equal(1);
-})
+});

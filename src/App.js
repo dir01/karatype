@@ -12,24 +12,9 @@ let soundPaths = {
 
 class App extends Component {
     render() {
-        let toolbar = this.trial.isStarted ? (
-            <Toolbar
-                progress={ this.trial.progress }
-                levels={ this.props.tutor.levels }
-                currentLevel={ this.props.tutor.level }
-                onLevelChange={ this.handleLevelChange.bind(this) }
-            />
-        ) : (
-            <Toolbar
-                text="Excercise is loaded. Start typing whenever ready."
-                levels={ this.props.tutor.levels }
-                currentLevel={ this.props.tutor.level }
-                onLevelChange={ this.handleLevelChange.bind(this) }
-            />
-        );
         return (
             <div className="App">
-                { toolbar }
+                { this.renderToolbar() }
                 <div className="text-container">
                     <TextToType snippets={ this.trial.snippets } />
                 </div>
@@ -37,6 +22,24 @@ class App extends Component {
                     <Keyboard layout={ layouts.qwerty } activeKeys={ this.trial.activeKeys }/>
                 </div>
             </div>
+        );
+    }
+
+    renderToolbar() {
+        return this.trial.isStarted ? (
+            <Toolbar
+                progress={ this.trial.progress }
+                levels={ this.props.tutor.levels }
+                currentLevel={ this.props.tutor.currentLevel }
+                onLevelChange={ this.handleLevelChange.bind(this) }
+            />
+        ) : (
+            <Toolbar
+                text="Excercise is loaded. Start typing whenever ready."
+                levels={ this.props.tutor.levels }
+                currentLevel={ this.props.tutor.currentLevel }
+                onLevelChange={ this.handleLevelChange.bind(this) }
+            />
         );
     }
 
