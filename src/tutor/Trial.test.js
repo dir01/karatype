@@ -8,6 +8,20 @@ let Trial = require(path.join(__dirname, 'Trial'));
 
 describe('Trial', () => {
 
+    describe('Trial.tryChar internals', () => {
+        it('saves time of a keystroke', () => {
+            let trial = new Trial('Hi');
+            trial.tryChar('X');
+            expect(trial.loggedKeystrokes[0].date).to.deep.equal(new Date());
+        });
+
+        it('allows manually setting keystroke time', () => {
+            let trial = new Trial('Hi');
+            trial.tryChar('s', new Date(1000));
+            expect(trial.loggedKeystrokes[0].date).to.deep.equal(new Date(1000));
+        });
+    });
+
     describe('Correct last char: new Trial("H").tryChar("H")', () => {
         let trial = new Trial('H');
         const isCorrectChar = trial.tryChar('H');
@@ -186,6 +200,30 @@ describe('Trial', () => {
                 trial.tryChar(chr);
             });
             expect(trial.stats.unproductiveKeystrokesRate).to.equal((7-5)/5*100); 
+        });
+
+        it('calculates WPM (words per minute)', () => {
+            let trial = new Trial('Hello world');
+            [
+                ['H', '22:46:24'],
+                ['e', '22:46:25'],
+                ['l', '22:46:26'],
+                ['l', '22:46:26'],
+                ['o', '22:46:26'],
+                [' ', '22:46:27'],
+                ['w', '22:46:27'],
+                ['o', '22:46:27'],
+                ['r', '22:46:27'],
+                ['l', '22:46:27'],
+                ['d', '22:46:27'],
+                ['!', '22:46:27']
+            ].forEach((i) => {
+                let char = i[0];
+                let time = i[1];
+                let date = new Date('Thu Jan 26 2017 ' + time + ' GMT+0300 (MSK)');
+                trial.tryChar(char, date);
+            });
+            expect(trial.wordsPerMinute).to.equal(40);
         });
     });
 

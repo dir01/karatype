@@ -5,18 +5,23 @@ class Trial {
         this.index = 0;
         this.errorsIndexes = [];
         this.errorsCount = 0;
-        this.keystrokesCount = 0;
         this.level = level;
+        this.loggedKeystrokes = [];
     }
 
-    tryChar(char) {
+    tryChar(char, date) {
         if (this.isOver) {
             return undefined;
         }
+
+        this.loggedKeystrokes.push({
+            char: char,
+            date: date || new Date()
+        });
+
         if (char.length > 1) {
             return this._trySpectialChar(char);
         }
-        this.keystrokesCount++;
         if (this._isCharCorrect(char)) {
             this._onCorrectChar();
             return true;
@@ -30,7 +35,6 @@ class Trial {
         if (char !== 'Backspace' || this.index === 0) {
             return undefined;
         }
-        this.keystrokesCount++;
         this.index--;
         let idx = this.errorsIndexes.indexOf(this.index);
         if (idx !== -1) {
@@ -85,6 +89,7 @@ class Trial {
         return {
             errorRate: this.errorRate,
             unproductiveKeystrokesRate: this.unproductiveKeystrokesRate,
+            wordsPerMinute: this.wordsPerMinute,
         };
     }
 
@@ -94,7 +99,17 @@ class Trial {
 
     get unproductiveKeystrokesRate() {
         let charsCount = this.textToType.length;
-        return (this.keystrokesCount - charsCount) / charsCount * 100;
+        return (this.loggedKeystrokes.length - charsCount) / charsCount * 100;
+    }
+
+    get wordsPerMinute() {
+        let typedChars = this.index + 1;
+        let typedWords = Math.floor(typedChars / 5);
+        let last = this.loggedKeystrokes[this.loggedKeystrokes.length - 1];
+        let first = this.loggedKeystrokes[0];
+        let seconds = (last.date - first.date) / 1000;
+        let wpm = Math.floor(typedWords * 60 / seconds);
+        return wpm;
     }
 
     get progress() {
