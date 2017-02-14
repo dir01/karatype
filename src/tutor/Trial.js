@@ -87,14 +87,14 @@ class Trial {
 
     get stats() {
         return {
-            errorRate: this.errorRate,
+            accuracy: this.accuracy,
             unproductiveKeystrokesRate: this.unproductiveKeystrokesRate,
-            wordsPerMinute: this.wordsPerMinute,
+            wordsPerMinute: this.wordsPerMinute
         };
     }
 
-    get errorRate() {
-        return this.errorsCount / this.textToType.length * 100;
+    get accuracy() {
+        return 1 - this.errorsIndexes.length / this.index;
     }
 
     get unproductiveKeystrokesRate() {

@@ -33,7 +33,7 @@ class App extends Component {
 
     get trial() {
         if (!this._trial || this._trial.isOver) {
-            this._trial = this.props.tutor.getNextTrial();
+            this._trial = this.props.tutor.getNextTrial(this._trial);
         }
         return this._trial;
     }

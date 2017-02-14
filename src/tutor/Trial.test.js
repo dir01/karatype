@@ -12,7 +12,7 @@ describe('Trial', () => {
         it('saves time of a keystroke', () => {
             let trial = new Trial('Hi');
             trial.tryChar('X');
-            expect(trial.loggedKeystrokes[0].date).to.deep.equal(new Date());
+            expect(trial.loggedKeystrokes[0].date.getTime()).to.deep.equal(new Date().getTime());
         });
 
         it('allows manually setting keystroke time', () => {
@@ -183,15 +183,26 @@ describe('Trial', () => {
     });
 
     describe('Trial stats', () => {
-        it('calculates errors percentage', () => {
+        it('calculates accuracy', () => {
             let trial = new Trial('Hello');
             trial.tryChar('H'); 
             trial.tryChar('e'); 
             trial.tryChar('l'); 
             trial.tryChar('l');
-            expect(trial.stats.errorRate).to.equal(0);
+            expect(trial.stats.accuracy).to.equal(1);
             trial.tryChar('x');
-            expect(trial.stats.errorRate).to.equal(20);
+            expect(trial.stats.accuracy).to.equal(1-1/5);
+        });
+
+        it('ignores fixed errors while calculating accuracy', () => {
+            let trial = new Trial('Hello');
+            trial.tryChar('H');
+            trial.tryChar('e');
+            expect(trial.stats.accuracy).to.equal(1);
+            trial.tryChar('k');
+            expect(trial.stats.accuracy).to.equal(1 - 1/3);
+            trial.tryChar('Backspace');
+            expect(trial.stats.accuracy).to.equal(1);
         });
 
         it('calculates unproductive keystrokes rate', () => {
@@ -203,7 +214,7 @@ describe('Trial', () => {
         });
 
         it('calculates WPM (words per minute)', () => {
-            let trial = new Trial('Hello world');
+            let trial = new Trial('Hello world!');
             [
                 ['H', '22:46:24'],
                 ['e', '22:46:25'],
