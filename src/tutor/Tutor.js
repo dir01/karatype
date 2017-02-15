@@ -1,20 +1,20 @@
-import Trial from './Trial';
+import Exercise from './Exercise';
 
 export default class Tutor {
     constructor (levels, currentLevel) {
         this.levels = levels;
-        this.currentLevel = currentLevel;
+        this.currentLevel = currentLevel || 0;
         this.statsLog = [];
     }
 
-    getNextTrial(oldTrial) {
-        if (oldTrial) {
-            this.statsLog.push(oldTrial.stats);
+    getNextExercise(oldExercise) {
+        if (oldExercise) {
+            this.statsLog.push(oldExercise.stats);
             if (this.shouldLevelUp()) this.currentLevel++;
         }
         let texts = this.levels[this.currentLevel].texts;
         let rand = texts[Math.floor(Math.random() * texts.length)];
-        return new Trial(rand, this.currentLevel);
+        return new Exercise(rand, this.currentLevel);
     }
 
     shouldLevelUp() {

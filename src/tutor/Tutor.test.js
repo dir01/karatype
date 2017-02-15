@@ -9,25 +9,25 @@ describe('Tutor', () => {
         {name: 'level2', texts: ['Hello world']}
     ]);
 
-    describe('getNextTrial', () => { 
-        it('returns trial for level 1', () => {
+    describe('getNextExercise', () => { 
+        it('returns exercise for level 1', () => {
             tutor.currentLevel = 0;
-            let trial = tutor.getNextTrial();
-            expect(trial.textToType).to.equal('Hello');
-            expect(trial.level).to.equal(0);
+            let exercise = tutor.getNextExercise();
+            expect(exercise.textToType).to.equal('Hello');
+            expect(exercise.level).to.equal(0);
         });
 
-        it('returns trial for level 2', () => {
+        it('returns exercise for level 2', () => {
             tutor.currentLevel = 1;
-            let trial = tutor.getNextTrial();
-            expect(trial.textToType).to.equal('Hello world');
-            expect(trial.level).to.equal(1);
+            let exercise = tutor.getNextExercise();
+            expect(exercise.textToType).to.equal('Hello world');
+            expect(exercise.level).to.equal(1);
         });
 
-        it('saves stats for previous trial if provided', () => {
+        it('saves stats for previous exercise if provided', () => {
             tutor.currentLevel = 0;
-            let oldTrial = {stats: 'foo'};
-            tutor.getNextTrial(oldTrial);
+            let oldExercise = {stats: 'foo'};
+            tutor.getNextExercise(oldExercise);
             expect(tutor.statsLog).to.deep.equal(['foo']);
         });
     });

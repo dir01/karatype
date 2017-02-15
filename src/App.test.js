@@ -4,14 +4,14 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import App from './App';
-import Trial from './tutor/Trial';
+import Exercise from './tutor/Exercise';
 import LevelSelector from './LevelSelector';
 import Toolbar from './Toolbar';
 
 
 let tutor = {
-    getNextTrial: () => {
-        return new Trial('Hello'); 
+    getNextExercise: () => {
+        return new Exercise('Hello');
     },
     currentLevel: 0
 };

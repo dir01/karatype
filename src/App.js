@@ -15,32 +15,36 @@ class App extends Component {
         return (
             <div className="App">
                 <Toolbar
-                    progress={ this.trial.isStarted ? this.trial.progress : null }
-                    text={ this.trial.isStarted ? null : 'Excercise is loaded. Start typing whenever ready' }
+                    progress={ this.exercise.isStarted ? this.exercise.progress : null }
+                    text={ this.exercise.isStarted ? null : 'Excercise is loaded. Start typing whenever ready' }
                     levels={ this.props.tutor.levels }
                     currentLevel={ this.props.tutor.currentLevel }
                     onLevelChange={ this.handleLevelChange.bind(this) }
                 />
                 <div className="text-container">
-                    <TextToType snippets={ this.trial.snippets } />
+                    <TextToType
+                        text={ this.exercise.textToType }
+                        errorsIndexes={ this.exercise.errorsIndexes }
+                        cursorIndex={ this.exercise.index }
+                    />
                 </div>
                 <div className="keyboard-container">
-                    <Keyboard layout={ layouts.qwerty } activeKeys={ this.trial.activeKeys }/>
+                    <Keyboard layout={ layouts.qwerty } highlightKeys={ this.exercise.activeKeys }/>
                 </div>
             </div>
         );
     }
 
-    get trial() {
-        if (!this._trial || this._trial.isOver) {
-            this._trial = this.props.tutor.getNextTrial(this._trial);
+    get exercise() {
+        if (!this._exercise || this._exercise.isOver) {
+            this._exercise = this.props.tutor.getNextExercise(this._exercise);
         }
-        return this._trial;
+        return this._exercise;
     }
 
     componentWillMount() {
         document.addEventListener('keydown', (event) => {
-            let result = this.trial.tryChar(event.key);
+            let result = this.exercise.tryChar(event.key);
             if (result === undefined) {
                 return;
             }
@@ -51,7 +55,7 @@ class App extends Component {
 
     handleLevelChange(newLevel) {
         this.props.tutor.currentLevel = newLevel;
-        this._trial = null;
+        this._exercise = null;
         this.forceUpdate();
     }
 

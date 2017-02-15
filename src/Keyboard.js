@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import './Keyboard.css';
 import KeyboardLayout from './tutor/KeyboardLayout';
+import classNames from 'classnames';
+
+import './Keyboard.css';
 
 
 class Keyboard extends Component {
@@ -8,32 +10,33 @@ class Keyboard extends Component {
         let layout = new KeyboardLayout(this.props.layout);
         return (
             <div className="Keyboard">{
-                layout.rows.map((row, i) => {
-                    return <div className="Keyboard__Row" key={i}>
-                        {row.map(this.renderKey.bind(this))}
-                    </div>;
-                })
+                layout.rows.map(this.renderKeyRow.bind(this))
             }</div>
         )
     }
 
-    renderKey(key, i) {
-        let keyCode = key.key.replace('space', ' ');
-        let active = (this.props.activeKeys || []).indexOf(keyCode) >= 0;
-        return <div
-            className={`KeyboardKey ${key.className} ${active ? 'active' : ''}`}
-            key={`${key.key}_${i}`}
-        >{key.label || key.key}</div>;
+    renderKeyRow(row, id) {
+        return <div className="Keyboard__Row" key={id}>
+            {row.map(this.renderKey.bind(this))}
+        </div>;
     }
 
-
+    renderKey(key, i) {
+        const char = key.key.replace('space', ' ');
+        const keyClass = classNames('Keyboard__Key', key.className, {
+            'highlighted': (this.props.highlightKeys || []).indexOf(char) >= 0
+        });
+        return <div className={keyClass} key={`${key.key}_${i}`}>
+            {key.label || key.key}
+        </div>;
+    }
 }
 
 
 class KeyboardKey extends Component {
     render() {
         return (
-            <div className={`KeyboardKey ${this.props.active ? 'active' : ''}`}>{this.props.label}</div>
+            <div className={`KeyboardKey ${this.props.isHighlighted ? 'highlighted' : ''}`}>{this.props.label}</div>
         )
     }
 }

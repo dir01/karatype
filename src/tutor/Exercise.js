@@ -1,5 +1,4 @@
-
-class Trial {
+class Exercise {
     constructor(textToType, level) {
         this.textToType = textToType;
         this.index = 0;
@@ -51,40 +50,6 @@ class Trial {
         return this.index === this.textToType.length;
     }
 
-    get snippets() {
-        let snippets = [];
-        let idx = this.index;
-        if (idx) {
-            let typedText = this.textToType.slice(0, idx);
-            if (!this.errorsIndexes.length) {
-                snippets.push({type: 'correct', text: typedText});
-            } else {
-                var correctText = '', errorText = '';
-                for (var i = 0; i < typedText.length; i++) {
-                    let isError = this.errorsIndexes.includes(i);
-                    if (isError) {
-                        errorText += typedText[i];
-                        if (correctText) {
-                            snippets.push({type: 'correct', text: correctText});
-                            correctText = '';
-                        }
-                    } else {
-                        correctText += typedText[i];
-                        if (errorText) {
-                            snippets.push({type: 'error', text: errorText});
-                            errorText = '';
-                        }
-                    }
-                }
-                errorText && snippets.push({type: 'error', text: errorText});
-                correctText && snippets.push({type: 'correct', text: correctText});
-            }
-        }
-        snippets.push({type: 'current', text: this.textToType.slice(idx, idx + 1)});
-        snippets.push({type: 'untyped', text: this.textToType.slice(idx + 1)});
-        return snippets;
-    }
-
     get stats() {
         return {
             accuracy: this.accuracy,
@@ -122,7 +87,8 @@ class Trial {
         }
         let char = this._getCurrentChar();
         let lower = char.toLowerCase();
-        return char === lower ? [char] : [lower, 'shift'];
+        var isUpperCase = char !== lower;
+        return isUpperCase ? [lower, 'shift'] : [char];
     }
 
     _onCorrectChar() {
@@ -145,4 +111,4 @@ class Trial {
 }
 
 
-module.exports = Trial;
+module.exports = Exercise;

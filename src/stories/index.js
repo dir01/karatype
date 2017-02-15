@@ -9,12 +9,11 @@ import TextToType from '../TextToType';
 
 storiesOf('TextToType', module)
     .add('normal', () => (
-        <TextToType snippets={ [
-            {type: 'correct', text: 'Oh my '},
-            {type: 'error', text: 'god it\'s the'},
-            {type: 'current', text: ' '},
-            {type: 'untyped', text: 'funky shit'}
-        ] } />
+        <TextToType
+            text="Oh my god it's the funky shit"
+            cursorIndex={18}
+            errorsIndexes={[6,7,8,9,10,11,12,13,14,15,16,16,17]}
+        />
     ));
 
 storiesOf('KeyboardKey', module)
