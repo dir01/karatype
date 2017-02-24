@@ -10,9 +10,7 @@ export default class TextToType extends Component {
         );
         return (
             <div className="TextToType">{
-                snippets.map((snippet, index) => {
-                    return this.renderSnippet(snippet, index);
-                })
+                snippets.map(this.renderSnippet.bind(this))
             }</div>
         );
     }
