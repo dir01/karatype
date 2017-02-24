@@ -3,8 +3,8 @@ import './Toolbar.css';
 import restart from './svg/restart.svg';
 import pause from './svg/pause.svg';
 import skip from './svg/skip.svg';
-import Indicator from './Indicator';
-import LevelSelector from './LevelSelector';
+import Indicator from '../Indicator/Indicator';
+import LevelSelector from '../LevelSelector/LevelSelector';
 
 export default class Toolbar extends Component {
     render() {

@@ -19,9 +19,9 @@ export default class KeyboardLayout {
                 key: match[1] || '',
                 label: match[3] === undefined ? match[1] : match[3],
                 className: match[1] || 'empty'
-            }
+            };
         } else {
-            return { key: char, label: char }
+            return { key: char, label: char };
         }
     }
 

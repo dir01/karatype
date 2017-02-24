@@ -4,9 +4,9 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import App from './App';
-import Exercise from './core/Exercise';
-import LevelSelector from './LevelSelector';
-import Toolbar from './Toolbar';
+import Exercise from '../../core/Exercise';
+import LevelSelector from '../LevelSelector/LevelSelector';
+import Toolbar from '../Toolbar/Toolbar';
 
 
 let tutor = {

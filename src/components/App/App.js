@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import TextToType from './TextToType';
-import {Keyboard, layouts} from './Keyboard';
-import Toolbar from './Toolbar';
+import TextToType from '../TextToType/TextToType';
+import {Keyboard, layouts} from '../Keyboard/Keyboard';
+import Toolbar from '../Toolbar/Toolbar';
 
 let soundPaths = {
     error: '/sounds/error.wav',

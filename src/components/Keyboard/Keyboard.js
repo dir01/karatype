@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import KeyboardLayout from './core/KeyboardLayout';
+import KeyboardLayout from './KeyboardLayout';
 import classNames from 'classnames';
 
 import './Keyboard.css';
@@ -12,11 +12,11 @@ class Keyboard extends Component {
             <div className="Keyboard">{
                 layout.rows.map(this.renderKeyRow.bind(this))
             }</div>
-        )
+        );
     }
 
     renderKeyRow(row, id) {
-        return <div className="Keyboard__Row" key={id}>
+        return <div className="Keyboard__Row" key={ id }>
             {row.map(this.renderKey.bind(this))}
         </div>;
     }
@@ -26,20 +26,12 @@ class Keyboard extends Component {
         const keyClass = classNames('Keyboard__Key', key.className, {
             'highlighted': (this.props.highlightKeys || []).indexOf(char) >= 0
         });
-        return <div className={keyClass} key={`${key.key}_${i}`}>
+        return <div className={ keyClass } key={ `${key.key}_${i}` }>
             {key.label || key.key}
         </div>;
     }
 }
 
-
-class KeyboardKey extends Component {
-    render() {
-        return (
-            <div className={`KeyboardKey ${this.props.isHighlighted ? 'highlighted' : ''}`}>{this.props.label}</div>
-        )
-    }
-}
 
 let layouts = {
     qwerty: [
@@ -51,4 +43,4 @@ let layouts = {
     ]
 };
 
-export { Keyboard, KeyboardKey, layouts };
+export { Keyboard, layouts };
