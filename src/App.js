@@ -43,14 +43,16 @@ class App extends Component {
     }
 
     componentWillMount() {
-        document.addEventListener('keydown', (event) => {
-            let result = this.exercise.tryChar(event.key);
-            if (result === undefined) {
-                return;
-            }
-            this.playSound(result);
-            this.forceUpdate();
-        });
+        document.addEventListener('keydown', this.onKeyDown.bind(this));
+    }
+
+    onKeyDown(event) {
+        let result = this.exercise.tryChar(event.key);
+        if (result === undefined) {
+            return;
+        }
+        this.playSound(result);
+        this.forceUpdate();
     }
 
     handleLevelChange(newLevel) {
