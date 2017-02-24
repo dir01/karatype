@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import KeyboardLayout from './tutor/KeyboardLayout';
+import KeyboardLayout from './core/KeyboardLayout';
 import classNames from 'classnames';
 
 import './Keyboard.css';
