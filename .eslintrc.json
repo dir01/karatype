@@ -17,6 +17,7 @@
         "react"
     ],
     "rules": {
+        "no-nested-ternary": 1,
         "indent": ["error", 4],
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "single"],
