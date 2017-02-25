@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf,  action,  linkTo } from '@kadira/storybook';
-import { KeyboardKey,  Keyboard,  layouts } from '../components/Keyboard/Keyboard';
+import { Keyboard,  layouts } from '../components/Keyboard/Keyboard';
 import Toolbar from '../components/Toolbar/Toolbar';
 import Indicator from '../components/Indicator/Indicator';
 import LevelSelector from '../components/LevelSelector/LevelSelector';
@@ -44,6 +44,12 @@ storiesOf('LevelSelector',  module)
 
 storiesOf('Toolbar',  module)
     .add('normal',  () => (
-        <Toolbar levels={ levels } currentLevel={ 1 } onLevelChange={ action('levelChange') } />
+        <Toolbar
+            levels={ levels }
+            currentLevel={ 0 }
+            onLevelChange={ action('levelChange') } 
+            onRestart={ action('restart') }
+            onSkip={ action('skip') }
+        />
     ));
 
