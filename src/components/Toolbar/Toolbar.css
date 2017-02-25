@@ -1,14 +1,13 @@
-#Toolbar {
+.Toolbar {
     width: 100%;
     background: linear-gradient(#eee, #ccc);
-    padding-left: 10px;
     border-bottom: 1px solid #333;
     vertical-align: middle;
     position: relative;
     text-align: left;
 }
 
-#Toolbar button {
+.Toolbar__button {
     width: 35px;
     height: 35px;
     border: 1px solid #888;
@@ -16,20 +15,23 @@
     margin: 10px 5px 10px 0;
     background: radial-gradient(closest-corner at 50% 35%, #fff, #ccc);
 }
+.Toolbar__button:first-child {
+    margin-left: 10px;
+}
 
-#Toolbar button:focus { outline:0; }
+.Toolbar__button:focus { outline:0; }
 
-#Toolbar button img {
+.Toolbar__button img {
     width: 15px; height: 15px;
     margin-top: 2px;
 }
-#Toolbar #Indicator {
+.Toolbar__Indicator {
     position: absolute;
     top: 50%; left: 50%;
     margin-top: -15px; margin-left: -150px;
 }
 
-#Toolbar .LevelSelector {
+.Toolbar__LevelSelector {
     position: absolute;
     right: 5%;
     top: 50%;

@@ -15,22 +15,24 @@ class App extends Component {
         return (
             <div className="App">
                 <Toolbar
+                    className="App__Toolbar"
                     progress={ this.exercise.isStarted ? this.exercise.progress : null }
                     text={ this.exercise.isStarted ? null : 'Excercise is loaded. Start typing whenever ready' }
                     levels={ this.props.tutor.levels }
                     currentLevel={ this.props.tutor.currentLevel }
                     onLevelChange={ this.handleLevelChange.bind(this) }
                 />
-                <div className="text-container">
-                    <TextToType
-                        text={ this.exercise.textToType }
-                        errorsIndexes={ this.exercise.errorsIndexes }
-                        cursorIndex={ this.exercise.index }
-                    />
-                </div>
-                <div className="keyboard-container">
-                    <Keyboard layout={ layouts.qwerty } highlightKeys={ this.exercise.activeKeys }/>
-                </div>
+                <TextToType
+                    className="App__TextToType"
+                    text={ this.exercise.textToType }
+                    errorsIndexes={ this.exercise.errorsIndexes }
+                    cursorIndex={ this.exercise.index }
+                />
+                <Keyboard
+                    className="App__Keyboard"
+                    layout={ layouts.qwerty }
+                    highlightKeys={ this.exercise.activeKeys }
+                />
             </div>
         );
     }

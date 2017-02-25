@@ -7,9 +7,10 @@ import './Keyboard.css';
 
 class Keyboard extends Component {
     render() {
+        const className = classNames('Keyboard', this.props.className);
         let layout = new KeyboardLayout(this.props.layout);
         return (
-            <div className="Keyboard">{
+            <div className={ className }>{
                 layout.rows.map(this.renderKeyRow.bind(this))
             }</div>
         );
@@ -23,10 +24,10 @@ class Keyboard extends Component {
 
     renderKey(key, i) {
         const char = key.key.replace('space', ' ');
-        const keyClass = classNames('Keyboard__Key', key.className, {
-            'highlighted': (this.props.highlightKeys || []).indexOf(char) >= 0
+        const className = classNames('Keyboard__Key', `Keyboard__Key--${key.className}`, {
+            'Keyboard__Key--highlighted': (this.props.highlightKeys || []).indexOf(char) >= 0
         });
-        return <div className={ keyClass } key={ `${key.key}_${i}` }>
+        return <div className={ className } key={ `${key.key}_${i}` }>
             {key.label || key.key}
         </div>;
     }

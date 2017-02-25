@@ -7,8 +7,8 @@
     letter-spacing: 1px;
 }
 
-.TextToType .correct { color: #ddd; }
-.TextToType .error { color: #D41341; }
-.TextToType .error.space { text-decoration: underline; }
-.TextToType .current { color: #2879C9; text-decoration: underline; }
-.TextToType .untyped { color: #444; }
+.TextToType__snippet--correct { color: #ddd; }
+.TextToType__snippet--error { color: #D41341; }
+.TextToType__snippet--error space { text-decoration: underline; }
+.TextToType__snippet--current { color: #2879C9; text-decoration: underline; }
+.TextToType__snippet--untyped { color: #444; }

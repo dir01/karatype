@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
+
 
 export default class LevelSelector extends Component {
-
     render() {
         return (
             <select
-                className="LevelSelector"
+                className={ classNames('LevelSelector', this.props.className) }
                 value={ this.props.currentLevel }
                 onChange={ this.handleChange.bind(this) }
             >{ this._renderOptions() }</select>

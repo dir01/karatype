@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
+
 import './TextToType.css';
+
 
 export default class TextToType extends Component {
     render() {
@@ -8,38 +11,28 @@ export default class TextToType extends Component {
             this.props.cursorIndex,
             this.props.errorsIndexes
         );
+        const className = classNames('TextToType', this.props.className);
         return (
-            <div className="TextToType">{
+            <div className={ className }>{
                 snippets.map(this.renderSnippet.bind(this))
             }</div>
         );
     }
 
     renderSnippet(snippet, index) {
-        if (snippet.type === 'error') {
-            return this.renderErrorSnippet(snippet, index);
-        } else {
-            return this.renderNormalSnippet(snippet, index);
-        }
-    }
-
-    renderNormalSnippet(snippet, index) {
+        const newText = snippet.text.replace(/ /g, '<space> </space>');
+        const className = classNames('TextToType__snippet', {
+            'TextToType__snippet--current': snippet.type === 'current',
+            'TextToType__snippet--untyped': snippet.type === 'untyped',
+            'TextToType__snippet--error': snippet.type === 'error',
+            'TextToType__snippet--correct': snippet.type === 'correct'
+        });
         return (
-            <span
+            <span 
                 key={ index }
-                className={ snippet.type }
-            >{snippet.text}</span>
-        );
-    }
-
-    renderErrorSnippet(snippet, index) {
-        let newText = (
-            '<span class="error">'
-            + snippet.text.replace(/ /g, '</span><span class="error space"> </span><span class="error">')
-            + '</span>'
-        );
-        return (
-            <span key={ index } dangerouslySetInnerHTML={ {__html: newText} } />
+                className={ className }
+                dangerouslySetInnerHTML={ {__html: newText} } 
+            />
         );
     }
 }

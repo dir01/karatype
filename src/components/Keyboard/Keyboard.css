@@ -18,15 +18,15 @@
     background: linear-gradient(#f6f6f6, #ededed);
 }
 
-.Keyboard__Key.highlighted {
+.Keyboard__Key--highlighted {
     background: #2879C9 !important;
     color: #fff;
     border-color: black;
 }
 
-.Keyboard__Key.tab { width: 8%; }
-.Keyboard__Key.caps, .Keyboard__Key.enter { width: 9.5%; }
-.Keyboard__Key.shift { width: 12.4%; }
-.Keyboard__Key.backspace { width: 8%; font-size: 15px; }
-.Keyboard__Key.empty { width: 6%; color: transparent; }
-.Keyboard__Key.space { width: 43%; color: transparent; }
+.Keyboard__Key--tab { width: 8%; }
+.Keyboard__Key--caps, .Keyboard__Key--enter { width: 9.5%; }
+.Keyboard__Key--shift { width: 12.4%; }
+.Keyboard__Key--backspace { width: 8%; font-size: 15px; }
+.Keyboard__Key--empty { width: 6%; color: transparent; }
+.Keyboard__Key--space { width: 43%; color: transparent; }

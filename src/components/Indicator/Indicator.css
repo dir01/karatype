@@ -1,4 +1,4 @@
-#Indicator {
+.Indicator {
     width: 300px;
     height: 30px;
     background: linear-gradient(#dbeac7, #edf8d9);
@@ -10,7 +10,7 @@
     text-align: center;
     color: #666;
 }
-#Indicator .progressBar {
+.Indicator__progressbar {
     height: 6px;
     width: 94%;
     margin: auto;
@@ -18,7 +18,7 @@
     border-radius: 2px;
     margin-top: 12px;
 }
-#Indicator .progressBar div {
+.Indicator__progressbar div {
     background: #bbb;
     height: 100%;
     border-right: 1px solid #bbb;

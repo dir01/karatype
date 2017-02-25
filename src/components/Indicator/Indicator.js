@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
+
 import './Indicator.css';
+
 
 export default class Indicator extends Component {
     render() {
@@ -11,7 +14,8 @@ export default class Indicator extends Component {
         } else {
             content = '';
         }
-        return (<div id="Indicator">{content}</div>);
+        const className = classNames('Indicator', this.props.className);
+        return <div className={className} >{content}</div>;
     }
 
     renderText() {
@@ -19,6 +23,6 @@ export default class Indicator extends Component {
     }
 
     renderProgressBar() {
-        return <div className="progressBar"><div style={ {width: `${this.props.progress}%`} }/></div>;
+        return <div className="Indicator__progressbar"><div style={ {width: `${this.props.progress}%`} }/></div>;
     }
 }
