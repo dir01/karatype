@@ -12,7 +12,9 @@ describe('Exercise', () => {
         it('saves time of a keystroke', () => {
             let exercise = new Exercise('Hi');
             exercise.tryChar('X');
-            expect(exercise.loggedKeystrokes[0].date.getTime()).to.deep.equal(new Date().getTime());
+            let loggedTime = exercise.loggedKeystrokes[0].date.getTime();
+            let now = new Date().getTime();
+            expect(now - loggedTime).not.to.be.above(1);
         });
 
         it('allows manually setting keystroke time', () => {
