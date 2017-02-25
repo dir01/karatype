@@ -18,13 +18,22 @@
 .Toolbar__button:first-child {
     margin-left: 10px;
 }
-
 .Toolbar__button:focus { outline:0; }
-
-.Toolbar__button img {
-    width: 15px; height: 15px;
-    margin-top: 2px;
+.Toolbar__button::after {
+    display: block;
+    height: 100%; width: 100%;
+    background-size: 15px;
+    background-position: 3px;
+    background-repeat: no-repeat;
+    content: ' ';
 }
+.Toolbar__button--restart::after{
+    background-image: url(./svg/restart.svg);
+}
+.Toolbar__button--skip::after {
+    background-image: url(./svg/skip.svg);
+}
+
 .Toolbar__Indicator {
     position: absolute;
     top: 50%; left: 50%;
