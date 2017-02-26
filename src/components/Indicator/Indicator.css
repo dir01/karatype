@@ -10,6 +10,15 @@
     text-align: center;
     color: #666;
 }
+.Indicator__text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
 .Indicator__progressbar {
     height: 6px;
     width: 94%;
@@ -18,7 +27,7 @@
     border-radius: 2px;
     margin-top: 12px;
 }
-.Indicator__progressbar div {
+.Indicator__progressbar>div {
     background: #bbb;
     height: 100%;
     border-right: 1px solid #bbb;
