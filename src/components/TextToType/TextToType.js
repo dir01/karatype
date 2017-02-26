@@ -5,6 +5,10 @@ import './TextToType.css';
 
 
 export default class TextToType extends Component {
+    constructor(props) {
+        super(props);
+        this.renderSnippet = this.renderSnippet.bind(this);
+    }
     render() {
         const snippets = textToSnippets(
             this.props.text,
@@ -14,7 +18,7 @@ export default class TextToType extends Component {
         const className = classNames('TextToType', this.props.className);
         return (
             <div className={ className }>{
-                snippets.map(this.renderSnippet.bind(this))
+                snippets.map(this.renderSnippet)
             }</div>
         );
     }

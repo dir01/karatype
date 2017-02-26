@@ -6,19 +6,25 @@ import './Keyboard.css';
 
 
 class Keyboard extends Component {
+    constructor(props) {
+        super(props);
+        this.renderKey = this.renderKey.bind(this);
+        this.renderKeyRow = this.renderKeyRow.bind(this);
+    }
+
     render() {
         const className = classNames('Keyboard', this.props.className);
         let layout = new KeyboardLayout(this.props.layout);
         return (
             <div className={ className }>{
-                layout.rows.map(this.renderKeyRow.bind(this))
+                layout.rows.map(this.renderKeyRow)
             }</div>
         );
     }
 
     renderKeyRow(row, id) {
         return <div className="Keyboard__Row" key={ id }>
-            {row.map(this.renderKey.bind(this))}
+            {row.map(this.renderKey)}
         </div>;
     }
 

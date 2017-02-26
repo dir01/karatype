@@ -11,6 +11,13 @@ let soundPaths = {
 
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.handleLevelChange = this.handleLevelChange.bind(this);
+        this.handleSkip = this.handleSkip.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+    }
+
     render() {
         return (
             <div className="App">
@@ -20,8 +27,8 @@ class App extends Component {
                     text={ this.exercise.isStarted ? null : 'Excercise is loaded. Start typing whenever ready' }
                     levels={ this.props.tutor.levels }
                     currentLevel={ this.props.tutor.currentLevel }
-                    onLevelChange={ this.handleLevelChange.bind(this) }
-                    onSkip={ this.handleSkip.bind(this) }
+                    onLevelChange={ this.handleLevelChange }
+                    onSkip={ this.handleSkip }
                 />
                 <TextToType
                     className="App__TextToType"
@@ -46,7 +53,7 @@ class App extends Component {
     }
 
     componentWillMount() {
-        document.addEventListener('keydown', this.onKeyDown.bind(this));
+        document.addEventListener('keydown', this.onKeyDown);
     }
 
     onKeyDown(event) {
