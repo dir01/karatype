@@ -57,6 +57,9 @@ class App extends Component {
     }
 
     onKeyDown(event) {
+        if (event.ctrlKey || event.altKey || event.metaKey) {
+            return;
+        }
         let result = this.exercise.tryChar(event.key);
         if (result === undefined) {
             return;
