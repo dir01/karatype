@@ -14,6 +14,7 @@
     border-radius: 50%;
     margin: 10px 5px 10px 0;
     background: radial-gradient(closest-corner at 50% 35%, #fff, #ccc);
+    cursor: pointer;
 }
 .Toolbar__button:first-child {
     margin-left: 10px;

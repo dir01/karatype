@@ -10,8 +10,10 @@ export default class Toolbar extends Component {
     render() {
         return (
             <div className={ classNames('Toolbar', this.props.className) }>
-                <button className="Toolbar__button Toolbar__button--restart" />
-                <button className="Toolbar__button Toolbar__button--skip" />
+                <button 
+                    className="Toolbar__button Toolbar__button--skip"
+                    onMouseUp={ this.props.onSkip }
+                />
                 <Indicator
                     className="Toolbar__Indicator"
                     text={ this.props.text }

@@ -21,6 +21,7 @@ class App extends Component {
                     levels={ this.props.tutor.levels }
                     currentLevel={ this.props.tutor.currentLevel }
                     onLevelChange={ this.handleLevelChange.bind(this) }
+                    onSkip={ this.handleSkip.bind(this) }
                 />
                 <TextToType
                     className="App__TextToType"
@@ -59,6 +60,11 @@ class App extends Component {
 
     handleLevelChange(newLevel) {
         this.props.tutor.currentLevel = newLevel;
+        this._exercise = null;
+        this.forceUpdate();
+    }
+
+    handleSkip() {
         this._exercise = null;
         this.forceUpdate();
     }
