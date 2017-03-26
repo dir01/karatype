@@ -1,0 +1,14 @@
+.Stat__name {
+    font-size: 1.2em;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-variant-ligatures: none;
+    letter-spacing: 1px;
+}
+
+.Stat__value {
+    font-size: 1.6em;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-variant-ligatures: none;
+    font-weight: bolder;
+    letter-spacing: 1px;
+}

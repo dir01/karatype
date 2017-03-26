@@ -5,7 +5,7 @@ import Toolbar from '../components/Toolbar/Toolbar';
 import Indicator from '../components/Indicator/Indicator';
 import LevelSelector from '../components/LevelSelector/LevelSelector';
 import TextToType from '../components/TextToType/TextToType';
-
+import Stat from '../components/Stat/Stat';
 
 storiesOf('TextToType',  module)
     .add('normal',  () => (
@@ -33,7 +33,7 @@ storiesOf('Indicator',  module)
     ));
 
 let levels = [
-    { name: 'f j' }, 
+    { name: 'f j' },
     { name: 'a s d f g h j k l ; q w e r t y u i o p [ ] z x c v b n m ,  . /' }
 ];
 
@@ -47,9 +47,16 @@ storiesOf('Toolbar',  module)
         <Toolbar
             levels={ levels }
             currentLevel={ 0 }
-            onLevelChange={ action('levelChange') } 
+            onLevelChange={ action('levelChange') }
             onRestart={ action('restart') }
             onSkip={ action('skip') }
+        />
+    ));
+
+storiesOf('Stat',  module)
+    .add('normal',  () => (
+        <Stat
+            stats={ {accuracy: 0.5, unproductiveKeystrokesRate: 66, wordsPerMinute: 26 } }
         />
     ));
 
