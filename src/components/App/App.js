@@ -3,6 +3,7 @@ import './App.css';
 import TextToType from '../TextToType/TextToType';
 import {Keyboard, layouts} from '../Keyboard/Keyboard';
 import Toolbar from '../Toolbar/Toolbar';
+import ExerciseStats from '../ExerciseStats/ExerciseStats';
 
 let soundPaths = {
     error: '/sounds/error.wav',
@@ -19,12 +20,23 @@ class App extends Component {
     }
 
     render() {
+        let indicatorText, indicatorProgress;
+        if (this.exercise.isStarted) {
+            indicatorText = null;
+            indicatorProgress = this.exercise.progress;
+        } else if (this.exercise.isOver) {
+            indicatorText = 'Exercise is finished. <b>Enter</b> to continue';
+            indicatorProgress = null;
+        } else {
+            indicatorText = 'Excercise is loaded. Start typing whenever ready';
+            indicatorProgress = null;
+        }
         return (
             <div className="App">
                 <Toolbar
                     className="App__Toolbar"
-                    progress={ this.exercise.isStarted ? this.exercise.progress : null }
-                    text={ this.exercise.isStarted ? null : 'Excercise is loaded. Start typing whenever ready' }
+                    progress={ indicatorProgress }
+                    text={ indicatorText }
                     levels={ this.props.tutor.levels }
                     currentLevel={ this.props.tutor.currentLevel }
                     onLevelChange={ this.handleLevelChange }
@@ -41,13 +53,14 @@ class App extends Component {
                     layout={ layouts.qwerty }
                     highlightKeys={ this.exercise.activeKeys }
                 />
+                {this.exercise.isOver ? <ExerciseStats stats={this.exercise.stats} /> : null}
             </div>
         );
     }
 
     get exercise() {
-        if (!this._exercise || this._exercise.isOver) {
-            this._exercise = this.props.tutor.getNextExercise(this._exercise);
+        if (!this._exercise) {
+            this._exercise = this.props.tutor.getNextExercise();
         }
         return this._exercise;
     }
@@ -57,11 +70,15 @@ class App extends Component {
     }
 
     onKeyDown(event) {
+        if (this.exercise.isOver && event.key === 'Enter') {
+            this._exercise = this.props.tutor.getNextExercise(this.exercise);
+            this.forceUpdate();
+            return
+        }
         let result = this.exercise.tryChar(event.key);
         if (result === undefined) {
             return;
         }
-        this.playSound(result);
         this.forceUpdate();
     }
 

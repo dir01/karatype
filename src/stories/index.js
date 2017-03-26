@@ -5,7 +5,7 @@ import Toolbar from '../components/Toolbar/Toolbar';
 import Indicator from '../components/Indicator/Indicator';
 import LevelSelector from '../components/LevelSelector/LevelSelector';
 import TextToType from '../components/TextToType/TextToType';
-import Stat from '../components/Stat/Stat';
+import ExerciseStats from '../components/ExerciseStats/ExerciseStats';
 
 storiesOf('TextToType',  module)
     .add('normal',  () => (
@@ -53,10 +53,12 @@ storiesOf('Toolbar',  module)
         />
     ));
 
-storiesOf('Stat',  module)
+storiesOf('ExerciseStats',  module)
     .add('normal',  () => (
-        <Stat
-            stats={ {accuracy: 0.5, unproductiveKeystrokesRate: 66, wordsPerMinute: 26 } }
-        />
+        <ExerciseStats stats={ {
+            accuracy: 0.5,
+            unproductiveKeystrokesRate: 9.523809523809524,
+            wordsPerMinute: 26 
+        } }/>
     ));
 
