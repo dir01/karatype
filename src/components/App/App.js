@@ -53,7 +53,7 @@ class App extends Component {
                     layout={ layouts.qwerty }
                     highlightKeys={ this.exercise.activeKeys }
                 />
-                {this.exercise.isOver ? <ExerciseStats stats={this.exercise.stats} /> : null}
+                {this.exercise.isOver ? <ExerciseStats stats={ this.exercise.stats } /> : null}
             </div>
         );
     }
@@ -73,7 +73,10 @@ class App extends Component {
         if (this.exercise.isOver && event.key === 'Enter') {
             this._exercise = this.props.tutor.getNextExercise(this.exercise);
             this.forceUpdate();
-            return
+            return;
+        }
+        if (event.ctrlKey || event.altKey || event.metaKey) {
+            return;
         }
         let result = this.exercise.tryChar(event.key);
         if (result === undefined) {
