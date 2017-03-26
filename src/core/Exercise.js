@@ -43,7 +43,7 @@ class Exercise {
     }
 
     get isStarted() {
-        return this.index > 0;
+        return this.index > 0 && ! this.isOver;
     }
 
     get isOver() {

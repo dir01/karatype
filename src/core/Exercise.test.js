@@ -40,6 +40,10 @@ describe('Exercise', () => {
             expect(exercise.isOver).to.be.true;
         });
 
+        it('finishes exercise', function() {
+          expect(exercise.isStarted).to.be.false;
+        });
+
         it('has empty activeChars', () => {
             expect(exercise.activeKeys).to.deep.equal([]);
         });
@@ -138,9 +142,9 @@ describe('Exercise', () => {
     describe('Exercise stats', () => {
         it('calculates accuracy', () => {
             let exercise = new Exercise('Hello');
-            exercise.tryChar('H'); 
-            exercise.tryChar('e'); 
-            exercise.tryChar('l'); 
+            exercise.tryChar('H');
+            exercise.tryChar('e');
+            exercise.tryChar('l');
             exercise.tryChar('l');
             expect(exercise.stats.accuracy).to.equal(1);
             exercise.tryChar('x');
@@ -163,7 +167,7 @@ describe('Exercise', () => {
             ['h', 'Backspace', 'H', 'e', 'l', 'l', 'o'].forEach((chr) => {
                 exercise.tryChar(chr);
             });
-            expect(exercise.stats.unproductiveKeystrokesRate).to.equal((7-5)/5*100); 
+            expect(exercise.stats.unproductiveKeystrokesRate).to.equal((7-5)/5*100);
         });
 
         it('calculates WPM (words per minute)', () => {
