@@ -40,8 +40,7 @@ export default class Tutor implements ITutor {
     }
     const getLast3 = <T>(a: T[]): T[] => a.slice(a.length - 3, a.length);
     const isBadStat = (stat: TStats) =>
-      !stat.level ||
-      stat.level < this.currentLevel ||
+      (stat.level as number) < this.currentLevel ||
       stat.accuracy < 0.95 ||
       stat.wordsPerMinute < 30;
     for (const stat of getLast3(this.statsLog)) {
