@@ -1,10 +1,10 @@
-import React from 'react';
-import { storiesOf,  action,  linkTo } from '@kadira/storybook';
-import { Keyboard,  layouts } from '../components/Keyboard/Keyboard';
-import Toolbar from '../components/Toolbar/Toolbar';
+import { action,  storiesOf } from '@kadira/storybook';
+import * as React from 'react';
 import Indicator from '../components/Indicator/Indicator';
+import { Keyboard,  layouts } from '../components/Keyboard/Keyboard';
 import LevelSelector from '../components/LevelSelector/LevelSelector';
 import TextToType from '../components/TextToType/TextToType';
+import Toolbar from '../components/Toolbar/Toolbar';
 
 
 storiesOf('TextToType',  module)
@@ -32,7 +32,7 @@ storiesOf('Indicator',  module)
         <Indicator progress="42" />
     ));
 
-let levels = [
+const levels = [
     { name: 'f j' }, 
     { name: 'a s d f g h j k l ; q w e r t y u i o p [ ] z x c v b n m ,  . /' }
 ];

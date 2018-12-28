@@ -1,10 +1,10 @@
-import { textToSnippets } from './TextToType.js';
 import { expect } from 'chai';
+import { textToSnippets } from './TextToType';
 
 
 describe('textToSnippets', () => {
     it('beginning: current "H" and untyped "ello" ', () => {
-        let snippets = textToSnippets('Hello');
+        const snippets = textToSnippets('Hello');
         expect(snippets).to.deep.equal([
             {text: 'H', type: 'current'},
             {text: 'ello', type: 'untyped'}
@@ -12,7 +12,7 @@ describe('textToSnippets', () => {
     });
 
     it('correct "H", current "e" and untyped "llo" ', () => {
-        let snippets = textToSnippets('Hello', 1);
+        const snippets = textToSnippets('Hello', 1);
         expect(snippets).to.deep.equal([
             {text: 'H', type: 'correct'},
             {text: 'e', type: 'current'},
@@ -21,7 +21,7 @@ describe('textToSnippets', () => {
     });
 
     it('correct "H", error at "e", current "l" and untyped "lo" ', () => {
-        let snippets = textToSnippets('Hello', 2, [1]);
+        const snippets = textToSnippets('Hello', 2, [1]);
         expect(snippets).to.deep.equal([
             {text: 'H', type: 'correct'},
             {text: 'e', type: 'error'},
@@ -31,7 +31,7 @@ describe('textToSnippets', () => {
     });
 
     it('correct "H", error at "e", correct "l", current "l" and untyped "o" ', () => {
-        let snippets = textToSnippets('Hello', 3, [1]);
+        const snippets = textToSnippets('Hello', 3, [1]);
         expect(snippets).to.deep.equal([
             {text: 'H', type: 'correct'},
             {text: 'e', type: 'error'},

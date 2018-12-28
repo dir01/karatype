@@ -1,24 +1,34 @@
-export default class KeyboardLayout {
+export type TLayout = LayoutChar[][]
 
-    constructor(rawLayout) {
+export type LayoutChar = {
+    className?: undefined | string;
+    key: string;
+    label: string;
+}
+
+export default class KeyboardLayout {
+    private rawLayout: string[];
+
+    constructor(rawLayout: string[]) {
         this.rawLayout = rawLayout;
     }
 
-    get rows(){
+
+    get rows(): TLayout {
         return this.rawLayout.map(this._parseRowString.bind(this));
     }
 
-    _parseRowString(rowString) {
+    public _parseRowString(rowString: string): LayoutChar[] {
         return rowString.split(' ').map(this._parseChar);
     }
 
-    _parseChar(char) {
-        let match = char.match('{(\\w+)?(:label=(.*))?}');
+    public _parseChar(char: string): LayoutChar {
+        const match = char.match('{(\\w+)?(:label=(.*))?}');
         if (match) {
             return {
+                className: match[1] || 'empty',
                 key: match[1] || '',
                 label: match[3] === undefined ? match[1] : match[3],
-                className: match[1] || 'empty'
             };
         } else {
             return { key: char, label: char };

@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Indicator from './Indicator';
-import { render } from 'enzyme';
 import {expect} from 'chai';
+import { render } from 'enzyme';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import Indicator from './Indicator';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -10,7 +10,7 @@ it('renders without crashing', () => {
 });
 
 it('contains progressbar with progress=', () => {
-    const wrapper = render(<Indicator progress="55" />);
+    const wrapper = render(<Indicator progress={55} />);
     expect(wrapper.find('.Indicator__progressbar').length).to.equal(1);
     expect(wrapper.find('.Indicator>span').length).to.equal(0);
 });
