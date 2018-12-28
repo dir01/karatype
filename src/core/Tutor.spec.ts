@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import Exercise from "./Exercise";
 import Tutor from "./Tutor";
 
@@ -12,22 +11,22 @@ describe("Tutor", () => {
     it("returns exercise for level 1", () => {
       tutor.currentLevel = 0;
       const exercise = tutor.getNextExercise();
-      expect(exercise.textToType).to.equal("Hello");
-      expect(exercise.level).to.equal(0);
+      expect(exercise.textToType).toEqual("Hello");
+      expect(exercise.level).toEqual(0);
     });
 
     it("returns exercise for level 2", () => {
       tutor.currentLevel = 1;
       const exercise = tutor.getNextExercise();
-      expect(exercise.textToType).to.equal("Hello world");
-      expect(exercise.level).to.equal(1);
+      expect(exercise.textToType).toEqual("Hello world");
+      expect(exercise.level).toEqual(1);
     });
 
     it("saves stats for previous exercise if provided", () => {
       tutor.currentLevel = 0;
       const oldExercise = { stats: "foo" };
       tutor.getNextExercise((oldExercise as any) as Exercise);
-      expect(tutor.statsLog).to.deep.equal(["foo"]);
+      expect(tutor.statsLog).toEqual(["foo"]);
     });
   });
 
@@ -38,7 +37,7 @@ describe("Tutor", () => {
         { level: 0, accuracy: 0.9, wordsPerMinute: 60 },
         { level: 0, accuracy: 1, wordsPerMinute: 55 }
       ];
-      expect(tutor.shouldLevelUp()).to.be.false;
+      expect(tutor.shouldLevelUp()).toBe(false);
     });
 
     it("false if there were slow exercises lately", () => {
@@ -47,7 +46,7 @@ describe("Tutor", () => {
         { level: 0, accuracy: 0.9, wordsPerMinute: 60 },
         { level: 0, accuracy: 1, wordsPerMinute: 55 }
       ];
-      expect(tutor.shouldLevelUp()).to.be.false;
+      expect(tutor.shouldLevelUp()).toBe(false);
     });
 
     it("true if three last were 100% accurate with speed > 45wpm", () => {
@@ -56,12 +55,12 @@ describe("Tutor", () => {
         { level: 0, accuracy: 1, wordsPerMinute: 60 },
         { level: 0, accuracy: 1, wordsPerMinute: 55 }
       ];
-      expect(tutor.shouldLevelUp()).to.be.true;
+      expect(tutor.shouldLevelUp()).toBe(true);
     });
 
     it("false if less than 3 exercises", () => {
       tutor.statsLog = [];
-      expect(tutor.shouldLevelUp()).to.be.false;
+      expect(tutor.shouldLevelUp()).toBe(false);
     });
 
     it("false if less than 3 exercises on current level", () => {
@@ -70,7 +69,7 @@ describe("Tutor", () => {
         { level: 0, accuracy: 1, wordsPerMinute: 100 },
         { level: 0, accuracy: 1, wordsPerMinute: 100 }
       ];
-      expect(tutor.shouldLevelUp()).to.be.false;
+      expect(tutor.shouldLevelUp()).toBe(false);
     });
 
     it("false if last level", () => {
@@ -80,7 +79,7 @@ describe("Tutor", () => {
         { level: 1, accuracy: 1, wordsPerMinute: 46 },
         { level: 1, accuracy: 1, wordsPerMinute: 66 }
       ];
-      expect(tutor.shouldLevelUp()).to.be.false;
+      expect(tutor.shouldLevelUp()).toBe(false);
     });
   });
 });

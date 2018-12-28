@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { shallow } from "enzyme";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -31,6 +30,6 @@ describe("LevelSelector", () => {
       .dive()
       .find("select")
       .getElement();
-    expect(select.props.value).to.equal(0);
+    expect(select.props.value).toEqual(0);
   });
 });

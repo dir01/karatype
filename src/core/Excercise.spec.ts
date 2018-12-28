@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import Exercise from "./Exercise";
 
 describe("Exercise", () => {
@@ -8,13 +7,13 @@ describe("Exercise", () => {
       exercise.tryChar("X");
       const loggedTime = exercise.loggedKeystrokes[0].date.getTime();
       const now = new Date().getTime();
-      expect(now - loggedTime).not.to.be.above(1);
+      expect(now - loggedTime).not.toBeGreaterThan(1);
     });
 
     it("allows manually setting keystroke time", () => {
       const exercise = new Exercise("Hi");
       exercise.tryChar("s", new Date(1000));
-      expect(exercise.loggedKeystrokes[0].date).to.deep.equal(new Date(1000));
+      expect(exercise.loggedKeystrokes[0].date).toEqual(new Date(1000));
     });
   });
 
@@ -23,23 +22,23 @@ describe("Exercise", () => {
     const isCorrectChar = exercise.tryChar("H");
 
     it('returns true since "H" is indeed "H" ', () => {
-      expect(isCorrectChar).to.be.true;
+      expect(isCorrectChar).toBe(true);
     });
 
     it("increases index", () => {
-      expect(exercise.index).to.equal(1);
+      expect(exercise.index).toEqual(1);
     });
 
     it("ends game", () => {
-      expect(exercise.isOver).to.be.true;
+      expect(exercise.isOver).toBe(true);
     });
 
     it("has empty activeChars", () => {
-      expect(exercise.activeKeys).to.deep.equal([]);
+      expect(exercise.activeKeys).toEqual([]);
     });
 
     it("makes exercise stop accepting chars", () => {
-      expect(exercise.tryChar("W")).to.be.undefined;
+      expect(exercise.tryChar("W")).toBeUndefined();
     });
   });
 
@@ -48,23 +47,23 @@ describe("Exercise", () => {
     const isCorrectChar = exercise.tryChar("h");
 
     it('returns false since "h" is not "H" ', () => {
-      expect(isCorrectChar).to.be.false;
+      expect(isCorrectChar).toBe(false);
     });
 
     it("increases index", () => {
-      expect(exercise.index).to.equal(1);
+      expect(exercise.index).toEqual(1);
     });
 
     it("increases errors count", () => {
-      expect(exercise.errorsCount).to.equal(1);
+      expect(exercise.errorsCount).toEqual(1);
     });
 
     it("saves error index", () => {
-      expect(exercise.errorsIndexes).to.deep.equal([0]);
+      expect(exercise.errorsIndexes).toEqual([0]);
     });
 
     it("game is not over since we have more stuff to type", () => {
-      expect(exercise.isOver).to.be.false;
+      expect(exercise.isOver).toBe(false);
     });
   });
 
@@ -76,27 +75,27 @@ describe("Exercise", () => {
     });
 
     it("denies Backspace when nothing was typed yet", () => {
-      expect(exercise.tryChar("Backspace")).to.be.undefined;
-      expect(exercise.index).to.equal(0);
+      expect(exercise.tryChar("Backspace")).toBeUndefined();
+      expect(exercise.index).toEqual(0);
     });
 
     it("handles Backspace after correct char", () => {
       exercise.tryChar("f");
-      expect(exercise.index).to.equal(1);
+      expect(exercise.index).toEqual(1);
       const ret = exercise.tryChar("Backspace");
-      expect(ret).to.be.true;
-      expect(exercise.index).to.equal(0);
+      expect(ret).toBe(true);
+      expect(exercise.index).toEqual(0);
     });
 
     it("handles Backspace after error", () => {
       exercise.tryChar("W");
-      expect(exercise.index).to.equal(1);
-      expect(exercise.errorsIndexes).to.deep.equal([0]);
+      expect(exercise.index).toEqual(1);
+      expect(exercise.errorsIndexes).toEqual([0]);
 
       const ret = exercise.tryChar("Backspace");
-      expect(ret).to.be.true;
-      expect(exercise.index).to.equal(0);
-      expect(exercise.errorsIndexes).to.deep.equal([]);
+      expect(ret).toBe(true);
+      expect(exercise.index).toEqual(0);
+      expect(exercise.errorsIndexes).toEqual([]);
     });
 
     it("handles Backspace after error and space", () => {
@@ -104,15 +103,15 @@ describe("Exercise", () => {
       exercise.tryChar("o");
       exercise.tryChar("X");
       exercise.tryChar(" ");
-      expect(exercise.index).to.equal(4);
-      expect(exercise.errorsIndexes).to.deep.equal([2]);
+      expect(exercise.index).toEqual(4);
+      expect(exercise.errorsIndexes).toEqual([2]);
       exercise.tryChar("Backspace");
-      expect(exercise.index).to.equal(3);
-      expect(exercise.errorsIndexes).to.deep.equal([2]);
+      expect(exercise.index).toEqual(3);
+      expect(exercise.errorsIndexes).toEqual([2]);
     });
 
     it("denies stuff like control", () => {
-      expect(exercise.tryChar("Ctrl")).to.be.undefined;
+      expect(exercise.tryChar("Ctrl")).toBeUndefined();
     });
   });
 
@@ -120,12 +119,12 @@ describe("Exercise", () => {
     const exercise = new Exercise("Hello");
 
     it("is 0 in the beggining", () => {
-      expect(exercise.progress).to.equal(0);
+      expect(exercise.progress).toEqual(0);
     });
 
     it("is 20 when 1 of 5 letters typed", () => {
       exercise.tryChar("H");
-      expect(exercise.progress).to.equal(20);
+      expect(exercise.progress).toEqual(20);
     });
   });
 
@@ -136,20 +135,20 @@ describe("Exercise", () => {
       exercise.tryChar("e");
       exercise.tryChar("l");
       exercise.tryChar("l");
-      expect(exercise.stats.accuracy).to.equal(1);
+      expect(exercise.stats.accuracy).toEqual(1);
       exercise.tryChar("x");
-      expect(exercise.stats.accuracy).to.equal(1 - 1 / 5);
+      expect(exercise.stats.accuracy).toEqual(1 - 1 / 5);
     });
 
     it("ignores fixed errors while calculating accuracy", () => {
       const exercise = new Exercise("Hello");
       exercise.tryChar("H");
       exercise.tryChar("e");
-      expect(exercise.stats.accuracy).to.equal(1);
+      expect(exercise.stats.accuracy).toEqual(1);
       exercise.tryChar("k");
-      expect(exercise.stats.accuracy).to.equal(1 - 1 / 3);
+      expect(exercise.stats.accuracy).toEqual(1 - 1 / 3);
       exercise.tryChar("Backspace");
-      expect(exercise.stats.accuracy).to.equal(1);
+      expect(exercise.stats.accuracy).toEqual(1);
     });
 
     it("calculates unproductive keystrokes rate", () => {
@@ -157,7 +156,7 @@ describe("Exercise", () => {
       ["h", "Backspace", "H", "e", "l", "l", "o"].forEach(chr => {
         exercise.tryChar(chr);
       });
-      expect(exercise.stats.unproductiveKeystrokesRate).to.equal(
+      expect(exercise.stats.unproductiveKeystrokesRate).toEqual(
         ((7 - 5) / 5) * 100
       );
     });
@@ -183,7 +182,7 @@ describe("Exercise", () => {
         const date = new Date("Thu Jan 26 2017 " + time + " GMT+0300 (MSK)");
         exercise.tryChar(char, date);
       });
-      expect(exercise.wordsPerMinute).to.equal(40);
+      expect(exercise.wordsPerMinute).toEqual(40);
     });
   });
 });
