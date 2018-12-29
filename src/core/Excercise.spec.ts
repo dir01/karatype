@@ -3,7 +3,7 @@ import Exercise from "./Exercise";
 describe("Exercise", () => {
   describe("Exercise.tryChar internals", () => {
     it("saves time of a keystroke", () => {
-      const exercise = new Exercise("Hi");
+      const exercise = mkExercise("Hi");
       exercise.tryChar("X");
       const loggedTime = exercise.loggedKeystrokes[0].date.getTime();
       const now = new Date().getTime();
@@ -11,14 +11,14 @@ describe("Exercise", () => {
     });
 
     it("allows manually setting keystroke time", () => {
-      const exercise = new Exercise("Hi");
+      const exercise = mkExercise("Hi");
       exercise.tryChar("s", new Date(1000));
       expect(exercise.loggedKeystrokes[0].date).toEqual(new Date(1000));
     });
   });
 
-  describe('Correct last char: new Exercise("H").tryChar("H")', () => {
-    const exercise = new Exercise("H");
+  describe('Correct last char: _mkExercise("H").tryChar("H")', () => {
+    const exercise = mkExercise("H");
     const isCorrectChar = exercise.tryChar("H");
 
     it('returns true since "H" is indeed "H" ', () => {
@@ -42,8 +42,8 @@ describe("Exercise", () => {
     });
   });
 
-  describe('Incorrect non-last char: new Exercise("He").tryChar("h")', () => {
-    const exercise = new Exercise("He");
+  describe('Incorrect non-last char: _mkExercise("He").tryChar("h")', () => {
+    const exercise = mkExercise("He");
     const isCorrectChar = exercise.tryChar("h");
 
     it('returns false since "h" is not "H" ', () => {
@@ -71,7 +71,7 @@ describe("Exercise", () => {
     let exercise: Exercise;
 
     beforeEach(() => {
-      exercise = new Exercise("foo bar");
+      exercise = mkExercise("foo bar");
     });
 
     it("denies Backspace when nothing was typed yet", () => {
@@ -116,7 +116,7 @@ describe("Exercise", () => {
   });
 
   describe("Exercise.progress", () => {
-    const exercise = new Exercise("Hello");
+    const exercise = mkExercise("Hello");
 
     it("is 0 in the beggining", () => {
       expect(exercise.progress).toEqual(0);
@@ -130,7 +130,7 @@ describe("Exercise", () => {
 
   describe("Exercise stats", () => {
     it("calculates accuracy", () => {
-      const exercise = new Exercise("Hello");
+      const exercise = mkExercise("Hello");
       exercise.tryChar("H");
       exercise.tryChar("e");
       exercise.tryChar("l");
@@ -141,7 +141,7 @@ describe("Exercise", () => {
     });
 
     it("ignores fixed errors while calculating accuracy", () => {
-      const exercise = new Exercise("Hello");
+      const exercise = mkExercise("Hello");
       exercise.tryChar("H");
       exercise.tryChar("e");
       expect(exercise.stats.accuracy).toEqual(1);
@@ -152,7 +152,7 @@ describe("Exercise", () => {
     });
 
     it("calculates unproductive keystrokes rate", () => {
-      const exercise = new Exercise("Hello");
+      const exercise = mkExercise("Hello");
       ["h", "Backspace", "H", "e", "l", "l", "o"].forEach(chr => {
         exercise.tryChar(chr);
       });
@@ -162,7 +162,7 @@ describe("Exercise", () => {
     });
 
     it("calculates WPM (words per minute)", () => {
-      const exercise = new Exercise("Hello world!");
+      const exercise = mkExercise("Hello world!");
       [
         ["H", "22:46:24"],
         ["e", "22:46:25"],
@@ -186,3 +186,5 @@ describe("Exercise", () => {
     });
   });
 });
+
+const mkExercise = (text: string) => new Exercise({ text });

@@ -1,3 +1,5 @@
+import { TChallenge } from "./Tutor";
+
 type TKeystroke = {
   char: string;
   date: Date;
@@ -15,6 +17,7 @@ export interface IExercise {
   isStarted: boolean;
   progress: number;
   textToType: string;
+  description?: string;
   errorsIndexes: number[];
   index: number;
   level: number | undefined;
@@ -25,14 +28,16 @@ export interface IExercise {
 
 export default class Exercise {
   public textToType: string;
+  public description?: string;
   public loggedKeystrokes: TKeystroke[];
   public index: number;
   public errorsCount: number;
   public errorsIndexes: number[];
   public level: number | undefined;
 
-  constructor(textToType: string, level?: number) {
-    this.textToType = textToType;
+  constructor(challenge: TChallenge, level?: number) {
+    this.textToType = challenge.text;
+    this.description = challenge.description;
     this.index = 0;
     this.errorsIndexes = [];
     this.errorsCount = 0;

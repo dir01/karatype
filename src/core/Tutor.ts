@@ -1,6 +1,15 @@
 import Exercise, { IExercise, TStats } from "./Exercise";
 
-export type TLevel = { name: string; texts: string[] };
+export type TChallenge = {
+  text: string;
+  description?: string;
+  [key: string]: string | undefined;
+};
+
+export type TLevel = {
+  name: string;
+  challenges: TChallenge[];
+};
 
 export interface ITutor {
   currentLevel: number;
@@ -26,8 +35,8 @@ export default class Tutor implements ITutor {
         this.currentLevel++;
       }
     }
-    const texts = this.levels[this.currentLevel].texts;
-    const rand = texts[Math.floor(Math.random() * texts.length)];
+    const challenges = this.levels[this.currentLevel].challenges;
+    const rand = challenges[Math.floor(Math.random() * challenges.length)];
     return new Exercise(rand, this.currentLevel);
   }
 

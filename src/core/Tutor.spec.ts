@@ -3,8 +3,8 @@ import Tutor from "./Tutor";
 
 describe("Tutor", () => {
   const tutor = new Tutor([
-    { name: "level1", texts: ["Hello"] },
-    { name: "level2", texts: ["Hello world"] }
+    { name: "level1", challenges: [{text: "Hello"}] },
+    { name: "level2", challenges: [{text: "Hello world"}] }
   ]);
 
   describe("getNextExercise", () => {

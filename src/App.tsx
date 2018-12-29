@@ -1,17 +1,19 @@
 import * as React from "react";
 import "./App.css";
-import { Keyboard, layouts } from "./components/Keyboard/Keyboard";
+import Description from "./components/Description";
+import Keyboard from "./components/Keyboard/Keyboard";
 import TextToType from "./components/TextToType/TextToType";
 import Toolbar from "./components/Toolbar/Toolbar";
 import { IExercise } from "./core/Exercise";
 import { ITutor } from "./core/Tutor";
+import { TLayout } from "./layouts/KeyboardLayout";
 
 const soundPaths = {
   error: "/sounds/error.wav",
   keystroke: "/sounds/keystroke.wav"
 };
 
-type AppProps = { tutor: ITutor };
+type AppProps = { tutor: ITutor; layout: TLayout };
 
 class App extends React.Component<AppProps> {
   private currentExercise: IExercise | null;
@@ -39,6 +41,11 @@ class App extends React.Component<AppProps> {
           onLevelChange={this.handleLevelChange}
           onSkip={this.handleSkip}
         />
+        {this.exercise.description ? (
+          <Description className="App__Description">
+            {this.exercise.description}
+          </Description>
+        ) : null}
         <TextToType
           className="App__TextToType"
           text={this.exercise.textToType}
@@ -47,7 +54,7 @@ class App extends React.Component<AppProps> {
         />
         <Keyboard
           className="App__Keyboard"
-          layout={layouts.qwerty}
+          layout={this.props.layout}
           highlightKeys={this.exercise.activeKeys}
         />
       </div>
