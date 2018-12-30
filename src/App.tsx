@@ -41,22 +41,24 @@ class App extends React.Component<AppProps> {
           onLevelChange={this.handleLevelChange}
           onSkip={this.handleSkip}
         />
-        {this.exercise.description ? (
-          <Description className="App__Description">
-            {this.exercise.description}
-          </Description>
-        ) : null}
-        <TextToType
-          className="App__TextToType"
-          text={this.exercise.textToType}
-          errorsIndexes={this.exercise.errorsIndexes}
-          cursorIndex={this.exercise.index}
-        />
-        <Keyboard
-          className="App__Keyboard"
-          layout={this.props.layout}
-          highlightKeys={this.exercise.activeKeys}
-        />
+        <div className="App__body">
+          {this.exercise.description ? (
+            <Description className="App__Description">
+              {this.exercise.description}
+            </Description>
+          ) : null}
+          <TextToType
+            className="App__TextToType"
+            text={this.exercise.textToType}
+            errorsIndexes={this.exercise.errorsIndexes}
+            cursorIndex={this.exercise.index}
+          />
+          <Keyboard
+            className="App__Keyboard"
+            layout={this.props.layout}
+            highlightKeys={this.exercise.activeKeys}
+          />
+        </div>
       </div>
     );
   }
