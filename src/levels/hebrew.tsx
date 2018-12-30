@@ -142,11 +142,11 @@ const mkLevels = (): TLevel[] => [
 ];
 
 const mkWordChallenge = (word: TWord): TChallenge => ({
-  text: `${word.original} `.repeat(20),
+  text: `${word.original.replace(".", "")} `.repeat(8),
   description: ((
     <span>
       <span className="romanization">{word.romanization}</span>
-      <span className="gender">({word.gender})</span>
+      {word.gender ? <span className="gender">({word.gender})</span> : null}
       <span className="hyphen">&mdash;</span>
       <span className="translation">{word.english}</span>
       <span className="class">{word.class}</span>
