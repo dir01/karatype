@@ -1,7 +1,18 @@
 {
   "name": "karatype",
+  "homepage": "https://dir01.github.io/karatype",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
   "dependencies": {
     "@types/classnames": "^2.2.6",
     "@types/node": "^10.12.18",
@@ -13,14 +24,6 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts-ts": "3.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -34,6 +37,7 @@
     "babel-loader": "^8.0.4",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "gh-pages": "^2.0.1",
     "prettier": "^1.15.3",
     "react-hot-loader": "^4.6.3",
     "react-test-renderer": "^16.7.0",
