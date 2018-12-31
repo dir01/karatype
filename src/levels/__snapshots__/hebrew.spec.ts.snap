@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hebrew levels level 1 1`] = `
+Array [
+  "zero",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+]
+`;
+
+exports[`hebrew levels level 10 1`] = `
+Array [
+  "פרחי מאי",
+  "קטן מאוד",
+  "אישה יפה",
+  "גוף האדם",
+  "שש מעלות",
+  "האיש רע.",
+  "שלוש דקות",
+  "עשר מעלות",
+]
+`;
