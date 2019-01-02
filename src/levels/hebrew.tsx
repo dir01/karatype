@@ -142,7 +142,7 @@ const mkLevels = (): TLevel[] => [
 ];
 
 const mkWordChallenge = (word: TWord): TChallenge => ({
-  text: `${word.original.replace(".", "")} `.repeat(8),
+  text: `${word.original.replace(".", "")} `.repeat(8).trim(),
   description: ((
     <span>
       <span className="romanization">{word.romanization}</span>
@@ -156,7 +156,7 @@ const mkWordChallenge = (word: TWord): TChallenge => ({
 });
 
 const mkSampleChallenge = (sample: TSample): TChallenge => ({
-  text: `${sample.original} `.repeat(8),
+  text: `${sample.original} `.repeat(3).trim(),
   description: ((
     <span>
       <span className="romanization">{sample.romanization}</span>
