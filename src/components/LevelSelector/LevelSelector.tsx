@@ -21,6 +21,7 @@ export default class LevelSelector extends React.Component<Props> {
         className={classNames("LevelSelector", this.props.className)}
         value={this.props.currentLevel}
         onChange={this.handleChange}
+        tabIndex={-1}
       >
         {this._renderOptions()}
       </select>
